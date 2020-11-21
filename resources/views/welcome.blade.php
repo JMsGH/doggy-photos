@@ -11,6 +11,14 @@
                 <h1 class="text-center">犬フォト！</h1>
             </div>
         </div>
+        
+        <div class="mt-5 text-center">
+        {{-- ユーザ登録ページへのリンク --}}
+        {!! link_to_route('signup.get', '登録する', [], ['class' => 'btn btn-primary w-50']) !!}
+        </div>
+
+
+        
     </div>
     
 

@@ -6,3 +6,7 @@
 .main-color {
   background-color: #E3FDFD;
 }
+
+.btn-default {
+  width: 150px;
+}

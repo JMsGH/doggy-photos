@@ -4,7 +4,7 @@
     @if (Auth::check())
     <a href="/" class="navbar-brand">投稿写真一覧</a>
     @else 
-    <a href="#" class="navbar-brand">犬フォト！</a>
+    <a href="/" class="navbar-brand">犬フォト！</a>
     @endif
 
     <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#nav-bar">
@@ -17,7 +17,7 @@
         {{-- ユーザ登録ページへのリンク --}}
          <li class="nav-item">{!! link_to_route('signup.get', '登録する', [], ['class' => 'nav-link']) !!}</li>
         {{-- ログインページへのリンク --}}
-        <li class="nav-item"><a href="#" class="nav-link">ログイン</a></li>      
+        <li class="nav-item">{!! link_to_route('login', 'ログイン', [], ['class' => 'nav-link']) !!}</li>     
       </ul>
     </div>
   </nav>

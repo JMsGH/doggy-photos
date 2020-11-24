@@ -14,10 +14,30 @@
     <div class="collapse navbar-collapse" id="nav-bar">
       <ul class="navbar-nav mr-auto"></ul>
       <ul class="navbar-nav">
+        @if (Auth::check())
+        {{-- お気に入り写真へのリンク --}}
+        <li class="nav-item"><a href="#" class="nav-link">お気に入り写真</a></li>
+        {{-- マイページへのリンク --}}
+        <li class="nav-item">{!! link_to_route('users.show', 'マイページ',  ['user' => Auth::id()], ['class' => 'nav-link']) !!}</li>
+        <li class="nav-item dropdown">
+          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
+          <ul class="dropdown-menu dropdown-menu-right">
+            {{-- 写真を投稿へのリンク --}}
+            {{-- マイページへのリンク --}}
+            {{-- 愛犬一覧稿へのリンク --}}
+            {{-- フィラリア投薬へのリンク --}}
+            {{-- お気に入り写真へのリンク --}}
+            {{-- ログアウト --}}
+            <li class="dropdown-item">{!! link_to_route('logout.get', 'ログアウト') !!}</li>
+          </ul>
+        </li>
+        
+        @else
         {{-- ユーザ登録ページへのリンク --}}
          <li class="nav-item">{!! link_to_route('signup.get', '登録する', [], ['class' => 'nav-link']) !!}</li>
         {{-- ログインページへのリンク --}}
-        <li class="nav-item">{!! link_to_route('login', 'ログイン', [], ['class' => 'nav-link']) !!}</li>     
+        <li class="nav-item">{!! link_to_route('login', 'ログイン', [], ['class' => 'nav-link']) !!}</li>
+        @endif
       </ul>
     </div>
   </nav>

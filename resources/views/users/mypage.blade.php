@@ -2,7 +2,7 @@
 
 @section('content')
 
-  <div class="row main-color"></div>
+  <div class="row"></div>
     <aside class="col-sm-4">
       {{-- ユーザ情報 --}}
       @include('users.card')
@@ -11,17 +11,8 @@
       {{-- タブ --}}
       // @include('users.navtabs')
       @if (Auth::id() == $user->id)
-        {{-- 投稿フォーム --}}
-        // @include('posts.form')
-        <form action="/posts" method="post" enctype="multipart/form-data">
-		@csrf
-		<p>
-				<input type="file" name="datafile">
-		</p>
-		<p>
-				<input type="submit" value="送信する">
-		</p>
-	</form>
+        {{-- 投稿フォームへのリンク --}}
+        // 
       @endif
       {{-- 投稿一覧 --}}
       // @include('posts.posts')

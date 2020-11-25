@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 </head>
 <body>
+	<h2>写真登録</h2>
 	<form action="/posts" method="post" enctype="multipart/form-data">
 		@csrf
 		<p>

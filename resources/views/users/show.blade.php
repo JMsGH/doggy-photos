@@ -9,22 +9,14 @@
     </aside>
     <div class="col-sm-8">
       {{-- タブ --}}
-      // @include('users.navtabs')
+      {{-- @include('users.navtabs') --}}
       @if (Auth::id() == $user->id)
-        {{-- 投稿フォーム --}}
-        // @include('posts.form')
-        <form action="/posts" method="post" enctype="multipart/form-data">
-		@csrf
-		<p>
-				<input type="file" name="datafile">
-		</p>
-		<p>
-				<input type="submit" value="送信する">
-		</p>
-	</form>
+        {{-- 投稿フォーム 
+        @include('posts.form')--}}
+
       @endif
-      {{-- 投稿一覧 --}}
-      // @include('posts.posts')
+      {{-- 投稿一覧 
+       @include('posts.posts') --}}
     </div>
   </div>
 

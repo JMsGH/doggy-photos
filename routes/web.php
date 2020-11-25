@@ -29,7 +29,8 @@ Route::group(['middleware' => ['auth']], function (){
   });
   
   Route::resource('users', 'UsersController', ['only' => ['index', 'show', 'create', 'store']]);
-  Route::get('users/{id}/mypage', 'UsersController@mypage')->name('users.mypage');
+  
+  Route::post('users.show', 'UsersController@storePhoto')->name('user.photo');
   
   
 });

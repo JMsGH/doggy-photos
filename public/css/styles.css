@@ -10,3 +10,7 @@
 .btn-default {
   width: 150px;
 }
+
+img {
+  object-fit: contain;
+}

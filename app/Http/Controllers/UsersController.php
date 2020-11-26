@@ -52,35 +52,74 @@ class UsersController extends Controller
     
     public function storePhoto (Request $request)
     {
-        $data;
+        $data = [];
+        $path;
           
           // s3にファイルを保存し、保存したファイル名を取得する
           $userPhoto = new PhotoUpload();
           
-          $data = [
-          'photo' => $userPhoto,
-          ];
+          $path = $userPhoto->photoUpload($request);
+          $path = "https://dog-photos-bucket.s3-ap-northeast-1.amazonaws.com/" . $path;
+          
+          if ($path) {
+            $user = \Auth::user();
+            $user->photo = $path;
+            $user->save();
+          }
           
           return back();
         
-    }
+      }
+      
+      /**
+       * ユーザのフォロー一覧ページを表示するアクション
+       * 
+       * @param $id ユーザのid
+       * @return \Illuminate\Http\Response
+       */
+       public function followings($id)
+       {
+         // idの値でユーザを検索して取得
+         $user = User::findOrFail($id);
+         
+         // 関係するモデルの件数をロード
+         $user->loadRelationshipCounts();
+         
+         // ユーザのフォロー一覧を取得
+         $followings = $user->followings()->paginate(10);
+         
+         // フォロー一覧ビューでそれらを表示
+         return view('users.followings', [
+          'user' => $user,
+          'users' => $followings,
+          ]);
+       }
+       
+      /**
+       * ユーザのフォロワー一覧ページを表示するアクション
+       * 
+       * @param $id ユーザのid
+       * @return \Illuminate\Http\Response
+       */
+       public function followers($id)
+       {
+         // idの値でユーザを検索して取得
+         $user = User::findOrFail($id);
+         
+         // 関係するモデルの件数をロード
+         $user->loadRelationshipCounts();
+         
+         // ユーザのフォロワー一覧を取得
+         $followers = $user->followers()->paginate(10);
+         
+         // フォロワー一覧ビューでそれらを表示
+         return view('users.followers', [
+          'user' => $user,
+          'users' => $followers,
+          ]);
+       }
+       
+      
     
-    /** ログインしているユーザのマイページを表示するアクション
-        * 
-        * @param $id ユーザのid
-        * @return \Illumiate\Http\Response
-        */
-    // public function mypage($id)
-    // {
-    //   $id = \Auth::id();
-      
-    //   $user = User::findOrFail($id);
-      
-    //   // 関係するモデルの件数をロード
-    //   // $user->loadRelationshipCounts();
-      
-    //   return view('users.mypage', [
-    //     'user' => $user,
-    //   ]);
-    // }
+     
 }

@@ -2,6 +2,10 @@
 
 namespace App\Lib;
 
+use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\Storage;
+
 // use App\User;  // 追加
 
 class PhotoUpload
@@ -22,20 +26,20 @@ class PhotoUpload
      {
         $user = \Auth::user();
         
-        $this->validate($request, [
-          'photo' => [
-           // アップロードされたファイルであること
-           'file',
-           // 画像ファイルであること
-           'image',
-           // MIMEタイプを指定
-           'mimes: jpeg, png'
-           ]
-         ]);
+        // $this->validate($request, [
+        //   'photo' => [
+        //   // アップロードされたファイルであること
+        //   'file',
+        //   // 画像ファイルであること
+        //   'image',
+        //   // MIMEタイプを指定
+        //   'mimes: jpeg, png'
+        //   ]
+        // ]);
        
         
         // ファイル存在とバリデーションのチェック
-        if ($request->hasFile('photo') && ($request->file('photo')->isValid([])))
+        if ($request->hasFile('photo'))
         {
     
           $disk = Storage::disk('s3');
@@ -45,7 +49,7 @@ class PhotoUpload
           return $photo;
             
          } else {
-           return back();
+           return false;
          }
      }
 }

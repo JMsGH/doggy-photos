@@ -11,8 +11,8 @@
 |
 */
 
-// welcomeページ
-Route::get('/', 'UsersController@index')->name('users.get');
+// Topページ
+Route::get('/', 'PostsController@index')->name('posts.get');  // 上書き
 
 // ユーザ登録
 Route::get('signup', 'Auth\RegisterController@showRegistrationForm')->name('signup.get');
@@ -29,14 +29,16 @@ Route::group(['middleware' => ['auth']], function (){
     Route::delete('unfollow', 'UserFollowController@destroy')->name('user.unfollow');
     Route::get('followings', 'UsersController@followings')->name('users.followings');
     Route::get('followers', 'UsersController@followers')->name('users.followers');
-    
+
 
   });
   
-  Route::resource('users', 'UsersController', ['only' => ['index', 'show', 'create', 'store']]);
+  Route::resource('users', 'UsersController', ['only' => ['index', 'create','show', 'store']]);
   
   Route::post('users.card', 'UsersController@storePhoto')->name('user.photo');
   Route::post('users.show', 'UsersController@storeAbout')->name('user.about');
+  
+  Route::resource('posts', 'PostsController', ['only' => ['store', 'destroy']]);
   
   
 });

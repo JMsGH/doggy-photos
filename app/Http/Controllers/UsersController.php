@@ -28,21 +28,25 @@ class UsersController extends Controller
     }
     
      public function show($id)
-    {
-        // idの値でユーザを検索して取得
-        $user = User::findOrFail($id);
-
-        // 関係するモデルの件数をロード
-        // $user->loadRelationshipCounts();
-
-        // ユーザの投稿一覧を作成日時の降順で取得
-        // $posts = $user->posts()->orderBy('created_at', 'desc')->paginate(10);
-
-        // ユーザ詳細ビューでそれらを表示
-        return view('users.show', [
-            'user' => $user,
-            // 'posts' => $posts,
-        ]);
+    {   
+        if (\Auth::check()){
+            // idの値でユーザを検索して取得
+            $user = User::findOrFail($id);
+    
+            // 関係するモデルの件数をロード
+            $user->loadRelationshipCounts();
+    
+            // ユーザの投稿一覧を作成日時の降順で取得
+            $posts = $user->posts()->orderBy('created_at', 'desc')->paginate(10);
+    
+            // ユーザ詳細ビューでそれらを表示
+            return view('users.show', [
+                'user' => $user,
+                'posts' => $posts,
+            ]);
+        }else {
+        return view('welcome');
+      }
     }
     
     public function createPhoto ()
@@ -52,14 +56,12 @@ class UsersController extends Controller
     
     public function storePhoto (Request $request)
     {
-        $data = [];
-        $path;
+        
           
-          // s3にファイルを保存し、保存したファイル名を取得する
+          // s3にファイルを保存し、保存先のパスを取得する
           $userPhoto = new PhotoUpload();
           
           $path = $userPhoto->photoUpload($request);
-          $path = "https://dog-photos-bucket.s3-ap-northeast-1.amazonaws.com/" . $path;
           
           if ($path) {
             $user = \Auth::user();

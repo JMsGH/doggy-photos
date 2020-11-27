@@ -38,15 +38,17 @@ class PhotoUpload
         // ]);
        
         
-        // ファイル存在とバリデーションのチェック
+        // ファイル存在のチェック
         if ($request->hasFile('photo'))
         {
     
           $disk = Storage::disk('s3');
           
           $photo = $disk->put('', $request->file('photo'));
-             
-          return $photo;
+          
+          $photoURL = $disk->url($photo);
+          
+          return $photoURL;
             
          } else {
            return false;

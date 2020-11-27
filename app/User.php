@@ -38,14 +38,13 @@ class User extends Authenticatable
     ];
     
     /**
-    * このユーザが所有する投稿（Postsモデルとの関係を定義）
-    * 
+    * このユーザが所有する投稿（Postモデルとの関係を定義）
+    */
     public function posts()
     {
-    return $this->hasMany(Posts:class);
+        return $this->hasMany(Post::class);
     }
     
-    */
     
     /**
     * このユーザがフォロー中のユーザ。（Userモデルとの関係を定義）
@@ -127,7 +126,7 @@ class User extends Authenticatable
          */
          public function loadRelationshipCounts()
          {
-             $this->loadCount(['followings', 'followers']);
+             $this->loadCount(['posts', 'followings', 'followers']);
          }
     
 }

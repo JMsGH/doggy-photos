@@ -15,6 +15,8 @@
       <ul class="navbar-nav mr-auto"></ul>
       <ul class="navbar-nav">
         @if (Auth::check())
+        {{-- ユーザ一覧ページへのリンク --}}
+        <li class="nav-item">{!! link_to_route('users.index', 'ユーザ一覧', [], ['class' => 'nav-link']) !!}</li>
         {{-- お気に入り写真へのリンク --}}
         <li class="nav-item"><a href="#" class="nav-link">お気に入り写真</a></li>
         {{-- マイページへのリンク --}}

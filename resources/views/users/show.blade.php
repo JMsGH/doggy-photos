@@ -15,8 +15,9 @@
         @include('posts.form')
 
       @endif
-      {{-- 投稿一覧
-       @include('posts.posts')  --}}
+      {{-- 投稿一覧 --}}
+      <h2 class="mt-3 mb-4">ギャラリー</h2>
+       @include('posts.posts_grid')
     </div>
   </div>
 

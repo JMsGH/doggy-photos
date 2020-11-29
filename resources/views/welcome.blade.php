@@ -8,7 +8,7 @@
                 <img src="{{ asset('storage/images/welcome_page_img.png') }}" alt="doggy_img" class="profile-img rounded-circle img-thumbnail border-0">
             </div>
             <div class="col-sm-6 align-items-center">
-                <h1 class="text-center">犬フォト！</h1>
+                <h1 class="text-center">犬フォト！ <i class="fas fa-paw"></i></h1>
             </div>
         </div>
         

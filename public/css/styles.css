@@ -14,3 +14,19 @@
 img {
   object-fit: contain;
 }
+
+.photo-grid {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.delete-button {
+  margin-top: 5px;
+  position: relative;
+  left: 10px;
+}
+
+.users {
+  width: 200px;
+  height: auto;
+}

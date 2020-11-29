@@ -1,10 +1,10 @@
 <ul class="nav nav-tabs nav-justified mb-3">
   {{-- ユーザ詳細タブ --}}
   <li class="nav-item">
-    {{-- <a href="{{ route('users.posts', ['user' => $user->id]) }}" class="nav-link {{ Request::routeIs('users.posts') ? 'active' : '' }}"> --}}
+    <a href="{{ route('users.show', ['user' => $user->id]) }}" class="nav-link {{ Request::routeIs('users.show') ? 'active' : '' }}">
       ギャラリー
-      {{-- <span class="badge badge-secondary">{{ $user->posts_count }}</span>
-    </a> --}}
+      <span class="badge badge-secondary">{{ $user->posts_count }}</span>
+    </a>
   </li>
   
   {{-- フォロー一覧タブ --}}

@@ -81,13 +81,13 @@ class PostsController extends Controller
     }
     
     // 投稿の削除
-    public function destroy(Request $request)
+    public function destroy($id)
     {
       // idの値で投稿を検索して取得
       $post = \App\Post::findOrFail($id);
       
       // 認証済みユーザ（閲覧者）がその投稿の所有者である場合は投稿を削除
-      if (\Auth::id() == $post->user_id) {
+      if (\Auth::id() === $post->user_id) {
         $post->delete();
       }
       
@@ -95,4 +95,17 @@ class PostsController extends Controller
       return back();
       
     }
+    
+    // 投稿詳細を表示
+    public function show($id)
+    {
+      // idの値で投稿を検索して取得
+      $post = \App\Post::findOrFail($id);
+      
+      return view('posts.posts_show', [
+
+        'post' => $post,
+      ]);
+    }
+    
 }

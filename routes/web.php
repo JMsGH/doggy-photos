@@ -29,6 +29,7 @@ Route::group(['middleware' => ['auth']], function (){
     Route::delete('unfollow', 'UserFollowController@destroy')->name('user.unfollow');
     Route::get('followings', 'UsersController@followings')->name('users.followings');
     Route::get('followers', 'UsersController@followers')->name('users.followers');
+    Route::get('posts', 'UserController@show')->name('users.posts');
 
 
   });
@@ -38,7 +39,7 @@ Route::group(['middleware' => ['auth']], function (){
   Route::post('users.card', 'UsersController@storePhoto')->name('user.photo');
   Route::post('users.show', 'UsersController@storeAbout')->name('user.about');
   
-  Route::resource('posts', 'PostsController', ['only' => ['store', 'destroy']]);
+  Route::resource('posts', 'PostsController', ['only' => ['store', 'destroy', 'show']]);
   
   
 });

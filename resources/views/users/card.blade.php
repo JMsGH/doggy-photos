@@ -15,7 +15,7 @@
 
       {!! Form::open(['route'=>'user.photo', 'enctype'=>'multipart/form-data']) !!}
       <div class="form-group">
-        {!! Form::label('photo', '写真を登録') !!}
+        {!! Form::label('photo', ($user->photo) ? '写真を変更' : '写真を登録', ['class'=>'font-weight-bold']) !!}
         {!! Form::file('photo') !!}
       </div>
       	{!! Form::submit(($user->photo) ? '変更する' : '登録する', ['class'=>'btn btn-info']) !!}

@@ -30,3 +30,12 @@ img {
   width: 200px;
   height: auto;
 }
+
+hr {
+  border-style: none;
+  border-top-style: dotted;
+  border-color: gray;
+  border-width: 5px;
+  height: 0px;
+  width: 50%;
+}

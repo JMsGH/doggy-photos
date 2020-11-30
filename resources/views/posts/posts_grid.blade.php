@@ -8,12 +8,11 @@
        <a href="{{ route('posts.show', $post->id) }}">
         <img class="img-fluid mb-2" src="{{ $post->photo }}" alt="投稿写真"></a>
 
-        @if (Auth::id() == $post->user_id)
-          {{-- 投稿削除ボタンのフォーム --}}
-          {!! Form::open(['route' => ['posts.destroy', $post->id], 'method' => 'delete']) !!}
-              {!! Form::submit('削除', ['class' => 'btn btn-outline-danger btn-sm delete-button']) !!}
-          {!! Form::close() !!}
-        @endif
+        {{-- 投稿削除ボタンのフォーム --}}
+        @include('posts.posts_delete_form')
+        
+        {{-- お気に入り／お気に入り解除ボタン --}}
+        @include('posts.favorite_button')
         </div>
       </div>
     

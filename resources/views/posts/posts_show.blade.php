@@ -6,12 +6,17 @@
       {{-- 写真 --}}
       <img class="img-fluid mb-2" src="{{ $post->photo }}" alt="投稿写真">
 
-        @if (Auth::id() == $post->user_id)
-          {{-- 投稿削除ボタンのフォーム --}}
-          {!! Form::open(['route' => ['posts.destroy', $post->id], 'method' => 'delete']) !!}
-              {!! Form::submit('削除', ['class' => 'btn btn-outline-danger btn-sm delete-button']) !!}
-          {!! Form::close() !!}
-        @endif
+        <div class="row post-button">
+          <div class="col-sm-3">
+            @include('posts.posts_delete_form')
+          </div>
+        
+          <div class="col-sm-9">
+            @include('posts.favorite_button')
+          </div>
+        </div>
+        
+        
     </aside>
     
     <div class="col-sm-8 mt-4">

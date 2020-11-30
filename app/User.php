@@ -126,7 +126,70 @@ class User extends Authenticatable
          */
          public function loadRelationshipCounts()
          {
-             $this->loadCount(['posts', 'followings', 'followers']);
+             $this->loadCount(['posts', 'followings', 'followers', 'favorites']);
          }
+         
+         /**
+          * このユーザのお気に入り投稿（Postモデルとの関係を定義）
+          */
+          public function favorites()
+          {
+              return $this->belongsToMany(Post::class, 'user_favorites', 'user_id', 'fav_post_id')->withTimestamps();
+          }
+          
+          /**
+           * $postIdで指定された投稿をお気に入りにする
+           * 
+           * @param int $postID
+           * @return bool
+           */
+           public function favorite($postId)
+           {
+               // 既にお気に入りにしているかの確認
+               $exist = $this->is_favorite('$postId');
+            
+                if ($exist) {
+                    // すでにお気に入りとしている場合は何もしない
+                    return false;
+                } else {
+                    // まだお気に入りとしていなければお気に入りとする
+                    $this->favorites()->attach($postId);
+                    return true;
+                }
+           }
+                
+            /**
+             * $postIdで指定された投稿をお気に入りから外す
+             * @param int $postId
+             * @return bool
+             */
+             public function unfavorite($postId)
+             {
+                // 既にお気に入りにしているかの確認
+                $exist = $this->is_favorite($postId);
+                
+                if ($exist) {
+                    // すでにお気に入りとしている場合はお気に入りから外す
+                    $this->favorites()->detach($postId);
+                    return true;
+                } else {
+                    // まだお気に入りとしていなければ何もしない
+                    return false;
+                }
+             }
+                 
+             /**
+              * 指定された$postIdをこのユーザがお気に入りとしているか調べる。していれば true を返す
+              * 
+              * @param int $postId
+              * @return bool
+              */
+              public function is_favorite($postId)
+              {
+                  // お気に入りとしている投稿の中にこの $postIdが存在するか
+                  return $this->favorites()->where('fav_post_id', $postId)->exists();
+              }
+           
+          
     
 }

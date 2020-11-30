@@ -19,4 +19,12 @@ class Post extends Model
      {
        return $this->belongsTo(User::class);
      }
+     
+    /**
+     * この投稿をお気に入りにしているユーザ（Userモデルとの関係を定義）
+     */
+     public function favorite_users()
+     {
+       return $this->belongsToMany(User::class, 'user_favorites', 'fav_post_id', 'user_id')->withTimestamps();
+     }
 }

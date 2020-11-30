@@ -20,10 +20,10 @@ img {
   margin-bottom: 10px;
 }
 
-.delete-button {
+.post-button {
   margin-top: 5px;
   position: relative;
-  left: 10px;
+
 }
 
 .users {

@@ -7,12 +7,13 @@
       <img class="img-fluid mb-2" src="{{ $post->photo }}" alt="投稿写真">
 
         <div class="row post-button">
-          <div class="col-sm-3">
-            @include('posts.posts_delete_form')
-          </div>
-        
+          {{-- お気に入りボタン --}}
           <div class="col-sm-9">
             @include('posts.favorite_button')
+          </div>
+          {{-- 削除ボタン --}}
+          <div class="col-sm-3">
+            @include('posts.posts_delete_form')
           </div>
         </div>
         

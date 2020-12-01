@@ -10,7 +10,7 @@
       {{-- タブ --}}
       @include('users.navtabs')
       {{-- 投稿一覧 --}}
-      @include('posts.posts')
+      @include('posts.posts_grid')
     </div>
   </div>
 @endsection

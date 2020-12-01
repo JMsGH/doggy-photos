@@ -5,7 +5,7 @@
         <div class="row align-items-center mb-5">
             <div class="col-sm-1"></div>
             <div class="col-sm-5">
-                <img src="{{ asset('storage/images/welcome_page_img.png') }}" alt="doggy_img" class="profile-img rounded-circle img-thumbnail border-0">
+                <img src="https://dog-photos-bucket.s3-ap-northeast-1.amazonaws.com/welcome_page_img.png" alt="doggy_img" class="profile-img rounded-circle img-thumbnail border-0">
             </div>
             <div class="col-sm-6 align-items-center">
                 <h1 class="text-center">犬フォト！ <i class="fas fa-paw"></i></h1>

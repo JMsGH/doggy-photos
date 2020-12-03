@@ -225,6 +225,14 @@ class User extends Authenticatable
             'about_me_and_dog' => $user['about_me_and_dog']
         ]);
     }
+    
+    /**
+     * このユーザに関する　投薬スケジュールを取得
+     */
+    public function medication()
+    {
+        return $this->hasOne('App\FilariasisMedication');
+    }
            
           
     

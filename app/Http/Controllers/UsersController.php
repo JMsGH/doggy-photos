@@ -1,14 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
-
 use App\User;  // 追加
-
 use App\Lib\PhotoUpload;  // 追加
-
 use Illuminate\Support\Facades\Storage;  // 追加
+use Illuminate\Support\Facades\Auth; // 追加
+
 
 class UsersController extends Controller
 {
@@ -142,8 +140,48 @@ class UsersController extends Controller
                 'id' => $user->id,
             ]);
         }
-       
+        
+  
+    /**
+     * 画面表示データ1件取得用
+     */
+    public function getEdit($user)
+    {
       
+      $user = \Auth::user();
+      //dd($user);
+      
+      // 'users.mypage'は情報確認用ビュー
+      return view('users.edit', [
+        'user' => $user,
+      ]);
+      
+    }
     
+      
+    /**
+     * ユーザ情報を更新する関数
+     * 
+     * @param unknown $id
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(Request $request)
+    {
+      $id = \Auth::id();
+      $request->validate([
+        'name' => 'required',
+        'email' => 'required',
+      ]);
+      
+      $user = User::find($request->id);
+      $user->name = $request->name;
+      $user->email = $request->email;
+      $user->about_me_and_dog = $request->about_me_and_dog;
+      $user->save();
+      
+      // 再度編集画面へリダイレクト
+      return redirect()->route('users.show', ['user' => Auth::id()]);
+    }
      
 }

@@ -31,9 +31,11 @@ Route::group(['middleware' => ['auth']], function (){
     Route::get('followers', 'UsersController@followers')->name('users.followers');
     Route::get('posts', 'UsersController@show')->name('users.posts');
     Route::get('favorites', 'UsersController@favorites')->name('user.favorites');
-
-
+    Route::patch('show', 'UsersController@update')->name('users.update');
+    Route::get('edit', 'UsersController@getEdit')->name('users.edit');
+    
   });
+
   
   Route::resource('users', 'UsersController', ['only' => ['index', 'create','show', 'store']]);
   

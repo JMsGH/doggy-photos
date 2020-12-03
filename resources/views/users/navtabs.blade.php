@@ -30,5 +30,12 @@
       <span class="badge badge-secondary">{{ $user->favorites_count }}</span>
     </a>
   </li>
+  
+  {{-- ユーザ情報更ページ --}}
+  <li class="nav-item">
+    <a href="{{ route('users.edit', ['id' => $user->id]) }}" class="nav-link {{ Request::routeIs('user.edit') ? 'active' : '' }}">
+      ユーザ情報確認
+    </a>
+  </li>
 </ul>
 

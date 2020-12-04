@@ -76,7 +76,9 @@ class PostsController extends Controller
           $post->save();
         }
         
+        // redirect('users.show');
         return back();
+        // redirect('/users/' . \Auth::id());
       
     }
     
@@ -106,6 +108,12 @@ class PostsController extends Controller
 
         'post' => $post,
       ]);
+    }
+    
+    // 投稿フォームを表示
+    public function posting()
+    {
+      return view('posts.posting');
     }
     
 }

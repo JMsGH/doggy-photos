@@ -33,6 +33,11 @@ Route::group(['middleware' => ['auth']], function (){
     Route::get('favorites', 'UsersController@favorites')->name('user.favorites');
     Route::patch('show', 'UsersController@update')->name('users.update');
     Route::get('edit', 'UsersController@getEdit')->name('users.edit');
+  });
+  
+  Route::get('posts.posting', 'PostsController@posting')->name('posts.posting');
+  Route::group(['prefix' => 'users/{id}/medications/{id2}'], function () {
+    Route::post('/medications_show', function(Request $request){});
     
   });
 
@@ -49,7 +54,9 @@ Route::group(['middleware' => ['auth']], function (){
   
   Route::resource('posts', 'PostsController', ['only' => ['store', 'destroy', 'show']]);
   
-  
+  Route::resource('medications', 'FilariasisMedicationsController');
+  Route::get('medications.input', 'FilariasisMedicationsController@input')->name('medications.input');
+  Route::get('medications.medications_show', 'FilariasisMedicationsController@show')->name('medications.show');
   
   
 });

@@ -227,13 +227,20 @@ class User extends Authenticatable
     }
     
     /**
-     * このユーザに関する　投薬スケジュールを取得
+     * このユーザが所有する投薬スケジュール（FilariasisMedicationとの関係を定義）
      */
-    public function medication()
+    public function medications()
     {
-        return $this->hasOne('App\FilariasisMedication');
+        return $this->hasMany(FilariasisMedication::class);
     }
            
+    /**
+     * このユーザが所有する投薬確定日（Administereとの関係を定義）
+     */
+    public function administeredDates()
+    {
+        return $this->hasMany(AdministeredDate::class);
+    }      
           
-    
+          
 }

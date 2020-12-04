@@ -18,7 +18,7 @@ class FilariasisMedication extends Model
     /**
      * この投薬スケジュールを所有するユーザ（Userモデルとの関係を定義）
      */
-    public function user()
+    public function medication_user()
     {
       return $this->belongsTo(User::class);
     }

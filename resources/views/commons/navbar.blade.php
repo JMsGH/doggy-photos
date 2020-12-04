@@ -26,9 +26,11 @@
           <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
           <ul class="dropdown-menu dropdown-menu-right">
             {{-- 写真を投稿へのリンク --}}
+            <li class="dropdown-item">{!! link_to_route('posts.posting', '写真を投稿',  ['user' => Auth::id()]) !!}</li>
             {{-- マイページへのリンク --}}
             {{-- 愛犬一覧稿へのリンク --}}
             {{-- フィラリア投薬へのリンク --}}
+            <li class="dropdown-item">{!! link_to_route('medications.show', 'フィラリア投薬') !!}</li>
             {{-- お気に入り写真へのリンク --}}
             {{-- ログアウト --}}
             <li class="dropdown-item">{!! link_to_route('logout.get', 'ログアウト') !!}</li>

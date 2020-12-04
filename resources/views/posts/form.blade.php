@@ -1,6 +1,6 @@
-<div class="mt-5 mb-5">
+<div class="mt-5">
 {!! Form::open(['route' => 'posts.store', 'enctype' => 'multipart/form-data']) !!}
-  <div class="form-group"></div>
+  <h2 class="mb-4">投稿フォーム</h2>
   <div class="form-group">
     {!! Form::label('photo', '写真') !!}
     {!! Form::file('photo') !!}
@@ -12,4 +12,6 @@
     {!! Form::submit('投稿する', ['class'=>'btn btn-info']) !!}
 {!! Form::close() !!}
 </div>
+<hr>
+
   

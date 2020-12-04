@@ -1,3 +1,16 @@
+img {
+  object-fit: contain;
+}
+
+hr {
+  border-style: none;
+  border-top-style: dotted;
+  border-color: gray;
+  border-width: 5px;
+  height: 0px;
+  width: 50%;
+}
+
 .row-eq-height {
   display: flex;
   flex-wrap: wrap;
@@ -9,10 +22,6 @@
 
 .btn-default {
   width: 150px;
-}
-
-img {
-  object-fit: contain;
 }
 
 .photo-grid {
@@ -32,11 +41,8 @@ img {
   height: auto;
 }
 
-hr {
-  border-style: none;
-  border-top-style: dotted;
+.box-border {
+  border-style: groove;
   border-color: gray;
-  border-width: 5px;
-  height: 0px;
-  width: 50%;
+  border-width: 2px;
 }

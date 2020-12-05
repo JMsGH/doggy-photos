@@ -14,6 +14,7 @@ class FilariasisMedication extends Model
       'counter',
       'administered'
     ];
+    
   
     /**
      * この投薬スケジュールを所有するユーザ（Userモデルとの関係を定義）

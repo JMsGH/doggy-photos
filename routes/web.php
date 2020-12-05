@@ -37,8 +37,9 @@ Route::group(['middleware' => ['auth']], function (){
   
   Route::get('posts.posting', 'PostsController@posting')->name('posts.posting');
   Route::group(['prefix' => 'users/{id}/medications/{id2}'], function () {
-    //Route::post('/medications_show', function(Request $request){});
-    Route::post('medications_show', 'FilariasisMedicationsController@store')->name('medications.store');
+    Route::post('/medications_show', function(Request $request){});
+    //Route::post('medications_show', 'FilariasisMedicationsController@store')->name('medications.store');
+    Route::get('medications_show', 'FilariasisMedicationsController@show')->name('medications.show');
   });
 
   

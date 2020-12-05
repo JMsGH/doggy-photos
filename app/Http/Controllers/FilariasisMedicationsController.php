@@ -24,16 +24,28 @@ class FilariasisMedicationsController extends Controller
       
       $medication->save();
       
-      $post_data = $request::all();
       
       // 投薬日表示ページへ移動
-      return view('medications.medications_show', compact('post_data'));
+      return view('medications.medications_show', ['user_id' => \Auth::id()]);
     }
     
     // 認証済みユーザ（閲覧者）の投薬予定・確認ページを表示
     public function show()
     {
-      return view('medications.medications_show');
+      $userId = \Auth::id();
+      
+      // データがある場合
+      if (FilariasisMedication::where('user_id', '=', $userId)->count() > 0) {
+         $data = FilariasisMedication::where('user_id', $userId)->orderBy('created_at', 'desc')->first();
+      
+        // return $data;
+        return view('medications.medications_show', ['start_date' => $data->start_date]);
+        
+        // データがない場合は start_date は null としてビューを表示
+      } else {
+        return view('medications.medications_show', ['start_date' => null]);
+      }
+     
     }
     
     // 認証済みユーザ（閲覧者）の投薬開始日･回数設定ページを表示

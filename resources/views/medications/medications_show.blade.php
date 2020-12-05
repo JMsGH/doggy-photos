@@ -1,10 +1,9 @@
 @extends('layouts.app')
-
 @section('content')
 
 <h2>フィラリア予防投薬予定・記録</h2>
 
-@if (isset($start_date))
+@if ($start_date)
   <ul class="list-group">
     <li class="list-group-item">
       {{ $start_date }}
@@ -23,8 +22,6 @@
     {!! link_to_route('medications.input', '設定する', ['class' => 'btn btn-sm btn-info']) !!}
   </p>
   
-
 @endif
-
 
 @endsection

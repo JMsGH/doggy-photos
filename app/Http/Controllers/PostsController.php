@@ -77,8 +77,10 @@ class PostsController extends Controller
         }
         
         // redirect('users.show');
-        return back();
+        // return back();
         // redirect('/users/' . \Auth::id());
+        session()->flash('flash_message', '投稿が保存されました');
+        return redirect('/');
       
     }
     

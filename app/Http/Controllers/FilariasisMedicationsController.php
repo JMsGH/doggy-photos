@@ -9,14 +9,25 @@ class FilariasisMedicationsController extends Controller
 {
     public function store(Request $request)
     {
-      // 認証済みユーザ（閲覧者）の投薬スケジュールとして作成（リクエストされた値をもとに作成）
-      $request->user()->filariasis_medications()->create([
-        'start_date' => $request->start_date,
-        'number_of_times' => $request->number_of_times
+            // バリデーション
+      $request->validate([
+        'start_date' => 'required | after:yesterday',
+        'number_of_times' => 'integer | gte:1',
       ]);
       
-      // 前のURLへリダイレクト
-      return back();
+      $medication = new FilariasisMedication();
+      
+      // 認証済みユーザ（閲覧者）の投薬スケジュールとして作成（リクエストされた値をもとに作成）
+      $medication->user_id = \Auth::id();
+      $medication->start_date = $request->start_date;
+      $medication->number_of_times = $request->number_of_times;
+      
+      $medication->save();
+      
+      $post_data = $request::all();
+      
+      // 投薬日表示ページへ移動
+      return view('medications.medications_show', compact('post_data'));
     }
     
     // 認証済みユーザ（閲覧者）の投薬予定・確認ページを表示

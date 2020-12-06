@@ -15,6 +15,10 @@ class FilariasisMedication extends Model
       'administered'
     ];
     
+    protected $dates = [
+      'start_date',  
+    ];
+    
   
     /**
      * この投薬スケジュールを所有するユーザ（Userモデルとの関係を定義）

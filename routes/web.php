@@ -38,8 +38,11 @@ Route::group(['middleware' => ['auth']], function (){
   Route::get('posts.posting', 'PostsController@posting')->name('posts.posting');
   Route::group(['prefix' => 'users/{id}/medications/{id2}'], function () {
     Route::post('/medications_show', function(Request $request){});
-    //Route::post('medications_show', 'FilariasisMedicationsController@store')->name('medications.store');
+    Route::post('medications_show', 'FilariasisMedicationsController@store')->name('medications.store');
     Route::get('medications_show', 'FilariasisMedicationsController@show')->name('medications.show');
+    Route::get('update', 'FilariasisMedicationsController@toUpdate')->name('medications.toUpdate');
+    //Route::post('medications_show', 'FilariasisMedicationsController@administered')->name('medications.administered');
+    Route::patch('update', 'FilariasisMedicationsController@update')->name('medications.update');
   });
 
   

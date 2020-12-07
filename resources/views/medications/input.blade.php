@@ -5,7 +5,7 @@
 <h5>投薬開始日と投薬回数の設定</h5>
   <div class="container"></div>
   <div class="col-sm-6">
-    <form action="users/{id}/medications/{id2}/medications_show" method="post">
+    <form action="{{ route('medications.store', ['id' => \Auth::id()]) }}" method="post">
       @csrf
     <div class="form-group">
       <label for="start_date">投薬開始日</label>

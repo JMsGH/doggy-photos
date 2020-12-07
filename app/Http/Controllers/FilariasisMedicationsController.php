@@ -19,7 +19,6 @@ class FilariasisMedicationsController extends Controller
       $medication = new FilariasisMedication();
       
       // 認証済みユーザ（閲覧者）の投薬スケジュールとして作成（リクエストされた値をもとに作成）
-      
       $medication->user_id = \Auth::id();
       $medication->start_date = $request->start_date;
       $medication->number_of_times = $request->number_of_times;
@@ -103,6 +102,7 @@ class FilariasisMedicationsController extends Controller
     // 投薬完了を確定させるアクション
     public function administered(Request $request)
     {
+      //dd();
       $userId = \Auth::id();
       $medId = $request->id;
       $administeredDate = $request->adminDate;

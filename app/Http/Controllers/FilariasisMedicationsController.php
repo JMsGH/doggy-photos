@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\FilariasisMedication; // 追加
+use App\AdministeredDate; // 追加
 
 class FilariasisMedicationsController extends Controller
 {
@@ -48,7 +49,7 @@ class FilariasisMedicationsController extends Controller
             ->first();
       
           // 取得した $data を viewに渡す
-          return view('medications.medications_show',compact('data'));
+          return view('medications.medications_show')->with(['data' => $data]);
         
         // データがない場合は start_date は null としてビューを表示
       } else {
@@ -66,10 +67,14 @@ class FilariasisMedicationsController extends Controller
     
     
     // 投薬日を変更するためのビューへ移動
-    public function toUpdate($medId)
+    public function toUpdate()
     {
       $userId = \Auth::id();
-      $medId = 'id2';
+      $data = FilariasisMedication::where('user_id', $userId)
+            ->orderBy('created_at', 'desc')
+            ->first();
+      
+      $medId = $data->id;
       
        // 'update.blade'は投薬日変更用ビュー
       return view('medications.update', [
@@ -81,18 +86,50 @@ class FilariasisMedicationsController extends Controller
     // 投稿日を変更するアクション
     public function update(Request $request)
     {
+      $userId = \Auth::id();
       $medId = $request->id;
       
       $data = FilariasisMedication::where('id', '=', $medId)->get();
       
-      dd($data);
+      $med = FilariasisMedication::find($request->id);
+      $med->start_date = $request->start_date;
+      $med->save();
       
-      // $med = FilariasisMedication::find($request->id);
-      // $med->start_date = $request->start_date;
-      // $med->save();
+      // 投薬予定日ページにリダイレクト
+      return redirect()->route('medications.show', ['id' => $userId, 'id2' => $medId]);
       
-      // // 投薬予定日ページはリダイレクト
-      // return redirect()->reoute('medications.show', ['id' => $userId, 'id2' => $medId]);
+    }
+    
+    // 投薬完了を確定させるアクション
+    public function administered(Request $request)
+    {
+      $userId = \Auth::id();
+      $medId = $request->id;
+      $administeredDate = $request->adminDate;
+      
+      $adminDate = new AdministeredDate();
+      
+      // 認証済みユーザ（閲覧者）の投薬完了として作成（リクエストされた値をもとに作成）
+      $adminDate->user_id = $userId;
+      $adminDate->medication_id = $medId;
+      $adminDate->administered_date = $administeredDate;
+      
+      $adminDate->save();
+      
+      $med = FilariasisMedication::find($medId);
+      $currentDate = $med->start_date;
+      $med->start_date = $currentDate->addDay(31);
+      
+      $currentCounter = $med->counter;
+      $med->counter = $currentCounter + 1;
+      
+      $med->save();
+      
+      $data = \App\FilariasisMedication::where('id', $medId)->get();
+
+      
+      // 投薬予定日ページにリダイレクト
+      return redirect()->route('medications.show', ['id' => $userId, 'id2' => $medId]);
       
     }
     

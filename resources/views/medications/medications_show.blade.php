@@ -1,10 +1,10 @@
 @extends('layouts.app')
 @section('content')
 
-<h2 class="mt-5 mb-4">フィラリア予防投薬予定・記録</h2>
+<h2 class="mt-5 mb-4">フィラリア予防薬 投薬予定・記録</h2>
 
 @if (!$data)
-  <h5 class="mb-4">
+  <h5 class="mb-4 line-spacing-wider">
         投薬開始日と投薬回数を設定しますか？<br>
         設定すると設定した回数分、31日間ごとに投薬予定日が表示されます。
   </h5>
@@ -24,23 +24,41 @@
 
 @else  
 <div class="row">
-  <div class="col-sm-6">
+  <div class="col-sm-8">
+    
+    <h5 class="mb-4 text-primary">
+      @if ($data->counter > 0)
+        {{ $data->counter }}回投薬済みです。残り{{ $data->number_of_times - $data->counter }}回です。
+      @endif
+    </h5>
+    
       <ul class="list-group">
         <li class="list-group-item med-date">
-          {{ $data->start_date->format('Y/m/d') }}
+          <div class="row">
+          <div class="col-sm-4">
+          {{ ($data->start_date->format('Y/m/d')) . '　' }}
+          </div>
           
+          @if (date("Y-m-d H:i:s") > ($data->start_date))
+            <div class="col-sm-4">
+            {!! Form::open(['route' => ['medications.administered', $data->user_id, $data->id]]) !!}
+              {!! Form::hidden('id', $data->id) !!}
+              {!! Form::hidden('adminDate', $data->start_date) !!}
+              {!! Form::submit('投薬完了', ['class'=>'btn btn-success']) !!}
+            {!! Form::close() !!}
+            </div>
+          @endif
+            <div class="col-sm-4">
             {!! link_to_route('medications.toUpdate', '投薬日変更', ['id' => $data->user_id, 'id2' => $data->id], ['class' => 'btn-link']) !!}
-            
-            {{-- {!! Form::open(['route' => 'medications.administered']) !!}
-          {!! Form::submit('投薬完了', ['id' => $data->id, 'user_id' => $data->user_id], ['class'=>'btn btn-sm-success', ]) !!}
-          {!! Form::close() !!} --}}
+            </div>
+          </div>
           
         </li>
     
         <div style="display: none;">
           {{ $i = 0 }}
         </div>
-        @while($i < ($data->number_of_times-1))
+        @while($i < (($data->number_of_times)-1-($data->counter)))
         <li class="list-group-item med-date">
           <div style="display: none;">
             {{ $data->start_date = ($data->start_date->addDay(31)) }}

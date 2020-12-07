@@ -50,9 +50,8 @@ div {}
 }
 
 a.btn-link {
-  margin-left: 5px;
   display: inline-block;
-  border-radius: 20%;
+  border-radius: 5%;
   /* 角丸       */
   font-size: 12pt;
   /* 文字サイズ */
@@ -60,29 +59,31 @@ a.btn-link {
   /* 文字位置   */
   cursor: pointer;
   /* カーソル   */
-  padding: 12px 12px;
+  padding: 10px 10px;
   /* 余白       */
   background: #007fff;
   /* 背景色     */
-  color: rgba(255, 255, 255, 0.99);
+  color: #ffffff;
   /* 文字色     */
   line-height: 1em;
   /* 1行の高さ  */
-  opacity: 0.9;
-  /* 透明度     */
   transition: .3s;
   /* なめらか変化 */
-  box-shadow: 3px 3px 3px #666666;
-  /* 影の設定 */
+  border: 2px solid #007fff;
+  /* 枠の指定 */
 }
 
 a.btn-link:hover {
-  box-shadow: none;
-  /* カーソル時の影消去 */
-  opacity: 1;
-  /* カーソル時透明度 */
+  color: #007fff;
+  /* 背景色     */
+  background: #ffffff;
+  /* 文字色     */
 }
 
 .med-date {
   font-size: 14pt;
+}
+
+.line-spacing-wider {
+  line-height: 2rem;
 }

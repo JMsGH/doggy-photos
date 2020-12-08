@@ -12,7 +12,7 @@ class FilariasisMedicationsController extends Controller
     {
             // バリデーション
       $request->validate([
-        'start_date' => 'required | after:yesterday',
+        'start_date' => 'required',  // 過去に遡って設定する可能性があるので、条件 after: yesterday を削除
         'number_of_times' => 'integer | gte:1',
       ]);
       

@@ -37,21 +37,29 @@
       <ul class="list-group">
         <li class="list-group-item med-date">
           <div class="row justify-content-md-left">
-          <div class="col-sm-6 text-left">
+          <div class="col-sm-3 text-left">
           {{ ($data->start_date->format('Y/m/d')) . '　' }}
           </div>
           
           @if (date("Y-m-d H:i:s") > ($data->start_date))
             <div class="col-sm-3">
-            {!! Form::open(['route' => ['medications.administered', $data->user_id, $data->id]]) !!}
+            {!! Form::open(['route' => ['medications.administered', $data->id]]) !!}
               {!! Form::hidden('id', $data->id) !!}
               {!! Form::hidden('adminDate', $data->start_date) !!}
               {!! Form::submit('投薬完了', ['class'=>'btn btn-success']) !!}
             {!! Form::close() !!}
             </div>
+            
+            {{-- <div class="col-sm-3">
+            {!! Form::open(['route' => ['medications.reminder', $data->id]]) !!}
+              {!! Form::hidden('id', $data->id) !!}
+              {!! Form::submit('リマインダー', ['class'=>'btn btn-info']) !!}
+            {!! Form::close() !!}
+            </div>  --}}
+            
           @endif
             <div class="col-sm-3">
-            {!! link_to_route('medications.toUpdate', '投薬日変更', ['id' => $data->user_id, 'id2' => $data->id], ['class' => 'btn-link']) !!}
+            {!! link_to_route('medications.edit', '投薬日変更', ['medId' => $data->id], ['class' => 'btn-link']) !!}
             </div>
           </div>
           
@@ -76,9 +84,6 @@
       </ul>
   </div>
 </div>
-
-
-
   
 @endif
 

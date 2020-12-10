@@ -4,7 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-use App\AdministeredDate; // 追加
+ // 追加
+use App\AdministeredDate;
+use App\User;
+use Carbon\Carbon;
+use Illuminate\Notifications\Notifiable; 
+use Thomasjohnkane\Snooze\Traits\SnoozeNotifiable; 
+use App\Notifications\ReminderMail; 
 
 class FilariasisMedication extends Model
 {
@@ -18,6 +24,9 @@ class FilariasisMedication extends Model
     protected $dates = [
       'start_date',  
     ];
+    
+    use Notifiable;
+    use SnoozeNotifiable;
     
   
     /**
@@ -37,27 +46,12 @@ class FilariasisMedication extends Model
     }
     
     
-    // ログイン中のユーザに start_date が存在するか確認。存在する場合は start_date と 残りの予約日を取得
-    public function ongoingSchedule($userId)
+    // 投薬日当日にメールを送信するアクション
+    public function setReminder($id)
     {
       $userId = \Auth::id();
-      $startDate = $userId->start_date;
-      $numberOfTimes = $userId->number_of_times;
-      $remainingTimes = $numberOfTimes - ($userId->counter);
-      $scheduledDates = [];
-      $nextDate;
-      
-      
-      if (isset($startDate)) {
-        for ($i = 0; $i <= $remainingTimes; $i++) {
-          array_push($scheduledDates, $startDate->addDays(31));
-          $nextDate = $scheduledDates[i];
-         }
-        return $scheduledDates;
-         
-      } else {
-        return false;
-      }  
+      $userEmail = \App\User::findOrFail($userId);
+      $userEmail->notifyAt(new ReminderMail, Carbon::parse($id->start_date));
     }
     
 }

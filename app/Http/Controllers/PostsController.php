@@ -1,12 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 
-use App\Lib\PhotoUpload; 
-
+use App\Lib\PhotoUpload;  // 追加
 use App\Post;  // 追加
+
 
 class PostsController extends Controller
 {

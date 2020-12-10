@@ -5,10 +5,13 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Thomasjohnkane\Snooze\Traits\SnoozeNotifiable; // 追加
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use SnoozeNotifiable;
+
 
     /**
      * The attributes that are mass assignable.
@@ -241,6 +244,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(AdministeredDate::class);
     }      
-          
+        
+    
+         // フィラリア投薬当日のリマインダーメールを送信するアクション
+    public function sendReminder()
+    {
+      //
+    }  
           
 }

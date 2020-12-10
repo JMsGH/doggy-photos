@@ -5,9 +5,22 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\FilariasisMedication; // 追加
 use App\AdministeredDate; // 追加
+use App\User; // 追加
+use Illuminate\Notifications\Notifiable; // 追加
+use Thomasjohnkane\Snooze\Traits\SnoozeNotifiable; // 追加
 
 class FilariasisMedicationsController extends Controller
 {
+    use Notifiable;
+    use SnoozeNotifiable;
+    
+    // 認証済みユーザ（閲覧者）の投薬開始日･回数設定ページを表示
+    public function input()
+    {
+      return view('medications.input');
+    }
+    
+    
     public function store(Request $request)
     {
             // バリデーション
@@ -58,29 +71,24 @@ class FilariasisMedicationsController extends Controller
      
     }
     
-    // 認証済みユーザ（閲覧者）の投薬開始日･回数設定ページを表示
-    public function input()
-    {
-      return view('medications.input');
-    }
-    
     
     // 投薬日を変更するためのビューへ移動
-    public function toUpdate()
+    public function edit($medication)
     {
       $userId = \Auth::id();
-      $data = FilariasisMedication::where('user_id', $userId)
-            ->orderBy('created_at', 'desc')
-            ->first();
+      // $data = FilariasisMedication::where('user_id', $userId)
+      //       ->orderBy('created_at', 'desc')
+      //       ->first();
       
-      $medId = $data->id;
+      // $medId = $data->id;
       
        // 'update.blade'は投薬日変更用ビュー
-      return view('medications.update', [
+      return view('medications.edit', [
         'user_id' => $userId,
-        'id' => $medId,
+        'id' => $medication,
       ]);
     }
+    
     
     // 投稿日を変更するアクション
     public function update(Request $request)
@@ -95,7 +103,7 @@ class FilariasisMedicationsController extends Controller
       $med->save();
       
       // 投薬予定日ページにリダイレクト
-      return redirect()->route('medications.show', ['id' => $userId, 'id2' => $medId]);
+      return redirect()->route('medications.show', ['id' => $userId, 'medication' => $medId]);
       
     }
     
@@ -125,12 +133,25 @@ class FilariasisMedicationsController extends Controller
       
       $med->save();
       
-      $data = \App\FilariasisMedication::where('id', $medId)->get();
+      // $data = \App\FilariasisMedication::where('id', $medId)->get();
 
       
       // 投薬予定日ページにリダイレクト
-      return redirect()->route('medications.show', ['id' => $userId, 'id2' => $medId]);
+      return redirect()->route('medications.show', ['id' => $userId, 'medication' => $medId]);
       
     }
+    
+    // 投薬日当日にリマインダーメールを送る
+    // public function reminder(Request $request)
+    // {
+    //   $userId = \Auth::id();
+    //   $user = \App\User::findOrFail($userId);
+    //   $userEmail = $user->email;
+      
+    //   $medId = \App\FilariasisMedication::findOrFail($id);
+      
+    //   $userEmail->notifyAt(new ReminderMail, Carbon::parse($medId->start_date));
+    // }
+    
     
 }

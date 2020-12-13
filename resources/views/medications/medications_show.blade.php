@@ -72,7 +72,7 @@
         @while($i < (($data->number_of_times)-1-($data->counter)))
         <li class="list-group-item med-date text-left">
           <div style="display: none;">
-            {{ $data->start_date = ($data->start_date->addDay(31)) }}
+          {{ $data->start_date = ($data->start_date->addDay(31)) }}
           </div>
           {{ $data->start_date->format('Y/m/d') }}
           <div style="display: none;">

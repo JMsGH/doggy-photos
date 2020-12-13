@@ -11,7 +11,18 @@ hr {
   width: 50%;
 }
 
-div {}
+hr.long {
+  border-style: none;
+  border-top-style: dotted;
+  border-color: gray;
+  border-width: 5px;
+  height: 0px;
+  width: 80%;
+}
+
+div.pagebody {
+  background-color: #E3FDFD;
+}
 
 .row-eq-height {
   display: flex;
@@ -86,4 +97,78 @@ a.btn-link:hover {
 
 .line-spacing-wider {
   line-height: 2rem;
+}
+
+a.btn-edit {
+  display: inline-block;
+  border-radius: 5%;
+  /* 角丸       */
+  font-size: 11pt;
+  /* 文字サイズ */
+  text-align: center;
+  /* 文字位置   */
+  cursor: pointer;
+  /* カーソル   */
+  padding: 10px 12px;
+  /* 余白       */
+  background: #00a2e8;
+  /* 背景色     */
+  color: #ffffff;
+  /* 文字色     */
+  line-height: 1em;
+  /* 1行の高さ  */
+  opacity: 1;
+  /* 透明度     */
+  transition: .3s;
+  /* なめらか変化 */
+  box-shadow: 2px 2px 3px #666666;
+  /* 影の設定 */
+}
+
+a.btn-edit:hover {
+  box-shadow: none;
+  /* カーソル時の影消去 */
+  opacity: 0.8;
+  /* カーソル時透明度 */
+}
+
+a.btn-detail {
+  display: inline-block;
+  border-radius: 5%;
+  /* 角丸       */
+  font-size: 11pt;
+  /* 文字サイズ */
+  text-align: center;
+  /* 文字位置   */
+  cursor: pointer;
+  /* カーソル   */
+  padding: 10px 12px;
+  /* 余白       */
+  background: #686de0;
+  /* 背景色     */
+  color: #ffffff;
+  /* 文字色     */
+  line-height: 1em;
+  /* 1行の高さ  */
+  opacity: 1;
+  /* 透明度     */
+  transition: .3s;
+  /* なめらか変化 */
+  box-shadow: 2px 2px 3px #666666;
+  /* 影の設定 */
+}
+
+a.btn-detail:hover {
+  box-shadow: none;
+  /* カーソル時の影消去 */
+  opacity: 0.8;
+  /* カーソル時透明度 */
+}
+
+.lil-darker-color {
+  background-color: #7ed6df;
+}
+
+.card-header-color {
+  background-color: #c7ecee;
 }

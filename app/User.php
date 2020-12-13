@@ -5,12 +5,10 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Thomasjohnkane\Snooze\Traits\SnoozeNotifiable; // 追加
 
 class User extends Authenticatable
 {
     use Notifiable;
-    use SnoozeNotifiable;
 
 
     /**
@@ -129,7 +127,7 @@ class User extends Authenticatable
      */
      public function loadRelationshipCounts()
      {
-         $this->loadCount(['posts', 'followings', 'followers', 'favorites']);
+         $this->loadCount(['posts', 'followings', 'followers', 'favorites', 'dogs']);
      }
          
      /**
@@ -251,5 +249,15 @@ class User extends Authenticatable
     {
       //
     }  
+    
+    /**
+    * このユーザに所属する犬（Dogモデルとの関係を定義）
+    */
+    public function dogs()
+    {
+        return $this->hasMany(Dog::class);
+    }
+    
+    
           
 }

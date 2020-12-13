@@ -67,7 +67,6 @@ class PostsController extends Controller
         $path = $postedPhoto->photoUpload($request);
         
         
-        //この条件は必ずtrueになる
         if ($path) {
           $post->user_id = \Auth::id();
           $post->photo = $path;

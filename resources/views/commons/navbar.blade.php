@@ -27,10 +27,12 @@
           <ul class="dropdown-menu dropdown-menu-right">
             {{-- 写真を投稿へのリンク --}}
             <li class="dropdown-item">{!! link_to_route('posts.posting', '写真を投稿',  ['user' => Auth::id()]) !!}</li>
-            {{-- マイページへのリンク --}}
-            {{-- 愛犬一覧稿へのリンク --}}
             {{-- フィラリア投薬へのリンク --}}
             <li class="dropdown-item">{!! link_to_route('medications.show', 'フィラリア投薬') !!}</li>
+            {{-- 愛犬登録へのリンク --}}
+            <li class="dropdown-item">{!! link_to_route('dogs.create', '愛犬登録', ['id' => \Auth::id()]) !!}</li>
+            {{-- 愛犬ページへのリンク --}}
+            <li class="dropdown-item">{!! link_to_route('dogs.index', '愛犬ページ', ['id' => \Auth::id()]) !!}</li>            
             {{-- お気に入り写真へのリンク --}}
             {{-- ログアウト --}}
             <li class="dropdown-item">{!! link_to_route('logout.get', 'ログアウト') !!}</li>

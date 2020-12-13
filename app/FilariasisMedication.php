@@ -7,9 +7,7 @@ use Illuminate\Database\Eloquent\Model;
  // 追加
 use App\AdministeredDate;
 use App\User;
-use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable; 
-use Thomasjohnkane\Snooze\Traits\SnoozeNotifiable; 
 use App\Notifications\ReminderMail; 
 
 class FilariasisMedication extends Model
@@ -26,8 +24,7 @@ class FilariasisMedication extends Model
     ];
     
     use Notifiable;
-    use SnoozeNotifiable;
-    
+
   
     /**
      * この投薬スケジュールを所有するユーザ（Userモデルとの関係を定義）

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5456fd0d1f1d097079887d1f7082c44f",
+    "content-hash": "d73edc1d7551ed6d89ebf0ab55b979eb",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -4292,16 +4292,16 @@
         },
         {
             "name": "symfony/translation",
-            "version": "v4.4.16",
+            "version": "v4.4.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "73095716af79f610f3b6338b911357393fdd10ab"
+                "reference": "84821e6a14a637e817f25d11147388695b6f790a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation/zipball/73095716af79f610f3b6338b911357393fdd10ab",
-                "reference": "73095716af79f610f3b6338b911357393fdd10ab",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/84821e6a14a637e817f25d11147388695b6f790a",
+                "reference": "84821e6a14a637e817f25d11147388695b6f790a",
                 "shasum": ""
             },
             "require": {
@@ -4373,7 +4373,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-10-24T11:50:19+00:00"
+            "time": "2020-11-27T06:35:49+00:00"
         },
         {
             "name": "symfony/translation-contracts",
@@ -4535,61 +4535,6 @@
                 }
             ],
             "time": "2020-10-26T20:47:51+00:00"
-        },
-        {
-            "name": "thomasjohnkane/snooze",
-            "version": "1.0.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/thomasjohnkane/snooze.git",
-                "reference": "ea2539ff7ac2e46d4ac473f6bc94c7a320319986"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/thomasjohnkane/snooze/zipball/ea2539ff7ac2e46d4ac473f6bc94c7a320319986",
-                "reference": "ea2539ff7ac2e46d4ac473f6bc94c7a320319986",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "~6.0 || ~7.0 || ~8.0",
-                "php": ">=7.2.5"
-            },
-            "require-dev": {
-                "orchestra/testbench": "~4.0|| ~5.0 || ~6.0",
-                "phpunit/phpunit": "^9.0",
-                "timacdonald/log-fake": "^1.7"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Thomasjohnkane\\Snooze\\ServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Thomasjohnkane\\Snooze\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Thomas Kane",
-                    "email": "thomasjohnkane@gmail.com"
-                }
-            ],
-            "description": "Schedule future notifications and reminders in Laravel",
-            "keywords": [
-                "delayed notifications",
-                "notifications",
-                "scheduled",
-                "snooze"
-            ],
-            "time": "2020-09-09T23:58:38+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",

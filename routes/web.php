@@ -34,9 +34,26 @@ Route::group(['middleware' => ['auth']], function (){
     Route::get('favorites', 'UsersController@favorites')->name('user.favorites');
     Route::patch('show', 'UsersController@update')->name('users.update');
     Route::get('edit', 'UsersController@getEdit')->name('users.edit');
+    
+    // 愛犬関連のルート
+    Route::get('dogs.dogs_create', 'DogsController@create')->name('dogs.create');
+    Route::get('dogs.dogs', 'DogsController@index')->name('dogs.index');
+    
+    
+  });
+  Route::resource('users', 'UsersController', ['only' => ['index', 'create','show', 'store']]);
+
+  // 投稿関連のルート
+  Route::post('users.card', 'UsersController@storePhoto')->name('user.photo');
+  Route::post('users.show', 'UsersController@storeAbout')->name('user.about');
+  Route::get('posts.posting', 'PostsController@posting')->name('posts.posting');
+  Route::group(['prefix' => 'posts/{id}'], function(){
+    Route::post('favorite', 'PostFavoriteController@store')->name('post.favorite');
+    Route::delete('unfavorite', 'PostFavoriteController@destroy')->name('post.unfavorite');
   });
   
-  Route::get('posts.posting', 'PostsController@posting')->name('posts.posting');
+  Route::resource('posts', 'PostsController', ['only' => ['store', 'destroy', 'show']]);  
+  
   
   // フィラリア予防投薬スケジュールのためのルート
   Route::group(['prefix' => 'medications/{medId}'], function () {
@@ -47,22 +64,27 @@ Route::group(['middleware' => ['auth']], function (){
     Route::post('medications_show', 'FilariasisMedicationsController@administered')->name('medications.administered');
     Route::patch('medications_show', 'FilariasisMedicationsController@update')->name('medications.update');
   });
-    Route::resource('medications', 'FilariasisMedicationsController', ['only' => ['store', 'update']]);
+  Route::resource('medications', 'FilariasisMedicationsController', ['only' => ['store', 'update']]);
   Route::get('medications.input', 'FilariasisMedicationsController@input')->name('medications.input');
   Route::get('medications.medications_show', 'FilariasisMedicationsController@show')->name('medications.show');
+  
+  
+  
+  
+  // 愛犬の写真を登録･変更するルート
+  Route::post('dogs.dogs', 'DogsController@storePhoto')->name('dogs.photo');
+  
+  Route::resource('dogs', 'DogsController', ['only' => ['destroy', 'store', 'update']]);
+  Route::group(['prefix' => 'dogs/{dogId}'], function () {
+    Route::get('dogs.dogs_edit', 'DogsController@getEdit')->name('dogs.edit');
+    Route::get('/', 'DogsController@show')->name('dogs.dog');
+    
+  });
 
   
-  Route::resource('users', 'UsersController', ['only' => ['index', 'create','show', 'store']]);
+
   
-  Route::post('users.card', 'UsersController@storePhoto')->name('user.photo');
-  Route::post('users.show', 'UsersController@storeAbout')->name('user.about');
-  
-  Route::group(['prefix' => 'posts/{id}'], function(){
-    Route::post('favorite', 'PostFavoriteController@store')->name('post.favorite');
-    Route::delete('unfavorite', 'PostFavoriteController@destroy')->name('post.unfavorite');
-  });
-  
-  Route::resource('posts', 'PostsController', ['only' => ['store', 'destroy', 'show']]);
+
   
 
   

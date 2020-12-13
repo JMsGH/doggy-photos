@@ -16,9 +16,7 @@
         "laravel/framework": "^6.20",
         "laravel/tinker": "^2.5",
         "laravelcollective/html": "^6.0",
-        "league/flysystem-aws-s3-v3": "~1.0",
-        "nesbot/carbon": "^2.42",
-        "thomasjohnkane/snooze": "^1.0"
+        "league/flysystem-aws-s3-v3": "~1.0"
     },
     "require-dev": {
         "facade/ignition": "^1.16.4",

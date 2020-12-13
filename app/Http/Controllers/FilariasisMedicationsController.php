@@ -7,13 +7,11 @@ use App\FilariasisMedication; // 追加
 use App\AdministeredDate; // 追加
 use App\User; // 追加
 use Illuminate\Notifications\Notifiable; // 追加
-use Thomasjohnkane\Snooze\Traits\SnoozeNotifiable; // 追加
 
 class FilariasisMedicationsController extends Controller
 {
     use Notifiable;
-    use SnoozeNotifiable;
-    
+
     // 認証済みユーザ（閲覧者）の投薬開始日･回数設定ページを表示
     public function input()
     {

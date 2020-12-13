@@ -1,9 +1,9 @@
 <div class="card" >
-  <div class="card-header">
+  <div class="card-header card-header-color">
     <h3 class="card-title">{{ $user->name }}</h3>
   </div>
   
-  <div class="card-body">
+  <div class="card-body lil-darker-color">
    
   @if (isset($user->photo)) 
       <img class="rounded-circle img-fluid" src="{{$user->photo}}" alt="プロフィール写真">
@@ -20,6 +20,9 @@
       </div>
       	{!! Form::submit(($user->photo) ? '変更する' : '登録する', ['class'=>'btn btn-info']) !!}
       {!! Form::close() !!}
+      
+      {{-- 愛犬登録ページへのリンク --}}
+      <p>{!! link_to_route('dogs.create', '愛犬を登録する', ['id' => \Auth::id()], ['class' => 'btn-link']) !!}</p>
     
     @else
       {{-- フォロー／アンフォローボタン --}}

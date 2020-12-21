@@ -16,7 +16,6 @@ class FilariasisMedication extends Model
       'start_date',
       'number_of_times',
       'counter',
-      'administered'
     ];
     
     protected $dates = [
@@ -40,15 +39,6 @@ class FilariasisMedication extends Model
     public function administered_date()
     {
       return $this->hasMany(AdministeredDate::class);
-    }
-    
-    
-    // 投薬日当日にメールを送信するアクション
-    public function setReminder($id)
-    {
-      $userId = \Auth::id();
-      $userEmail = \App\User::findOrFail($userId);
-      $userEmail->notifyAt(new ReminderMail, Carbon::parse($id->start_date));
     }
     
 }

@@ -19,7 +19,6 @@ class CreateFilariasisMedicationsTable extends Migration
             $table->date('start_date');
             $table->unsignedSmallInteger('number_of_times');
             $table->tinyInteger('counter');
-            $table->boolean('administered');
             $table->timestamps();
             
             // 外部キー制約

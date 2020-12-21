@@ -26,7 +26,7 @@ class ChangeBirthdayFromDogsTable extends Migration
     public function down()
     {
         Schema::table('dogs', function (Blueprint $table) {
-            $table->dateTime('birthday', 6)->nullable();
+            $table->dateTime('birthday', 6)->nullable()->change();
         });
     }
 }

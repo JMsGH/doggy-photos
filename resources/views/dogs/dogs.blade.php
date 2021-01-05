@@ -28,11 +28,11 @@
           <div class="font-weight-bold">
           <h4 class="mb-3">{{ $dog->dog_name }}</h4>
           @if ($dog->birthday)
-            <p>誕生日: {{ $dog->birthday }} </p>
+            <p>誕生日:  {{ $dog->birthday }} </p>
           @else
             <p>誕生日</p>
           @endif
-          <p>コメント: {{ $dog->comment }} </p>
+          <p>コメント:</p>
           </div>
           <div>
           <p>{{ $dog->comment }}</p>

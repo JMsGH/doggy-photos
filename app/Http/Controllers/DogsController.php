@@ -53,14 +53,16 @@ class DogsController extends Controller
       $dog->comment = $request->comment;
       $dog->save();
       
-      $userId = \Auth::id();
-      $user = \Auth::user();
-      $dogs = $user->dogs();
+      // $userId = \Auth::id();
+      // $user = \Auth::user();
+      // $dogs = $user->dogs();
       //$dogs = $user->dogs()->orderBy('created_at', 'desc')->paginate(5);
 
       
       session()->flash('flash_message', '愛犬が登録されました');
-      return view('dogs.dogs', ['id' => $userId, 'dogs' => $dogs, ]);
+      return view('dogs.dog', [
+        'dog' => $dog,
+      ]);
 
     }
     

@@ -15,7 +15,7 @@
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css"
   />
-
+  
     <link rel="stylesheet" href="/css/styles.css">
     
     <title>Doggy-photos</title>
@@ -37,6 +37,13 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"></script>
     <script src="{{ asset('../../../public/js/main.js') }}"></script>
+    
+    {{-- bs-custom-file-input --}}
+    <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.js"></script>
+    <script>
+      bsCustomFileInput.init();
+    </script>
+
 
   </body>
 </html>

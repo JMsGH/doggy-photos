@@ -6,7 +6,7 @@
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card">
-        <div class="card-header">ユーザ情報の編集</div>
+        <div class="card-header bg-info text-white font-weight-bolder" >ユーザー情報の編集</div>
         <div class="card-body">
           <form action ="{{ route('users.update', ['id' => $user->id]) }}" method="POST">
             @method('PATCH')
@@ -14,7 +14,7 @@
             <table class="table">
           <tbody>
             <tr>
-              <th scope="row">ユーザ名</th>
+              <th scope="row">ユーザー名</th>
               <td><input type="text" name="name" value="{{ $user->name }}" /></td>
             </tr>
             <tr>
@@ -28,7 +28,7 @@
             </tr>
           </tbody>
         </table>
-        <input type="submit" value="変更" />
+        <input class="btn-link" type="submit" value="変更" />
           </form>
           
         </div>

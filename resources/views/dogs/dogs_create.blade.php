@@ -18,14 +18,18 @@
 {!! Form::close() !!}
 </div> --}}
 
-<h2 class="mt-5 mb-5">愛犬登録フォーム <i class="fas fa-paw"></i></h2>
-  <div class="container"></div>
-  <div class="col-sm-6">
+<h2 class="mt-5 mb-5 text-center">愛犬登録フォーム <i class="fas fa-paw"></i></h2>
+  <div class="container">
+    <div class="row justify-content-center">
+  <div class="col-sm-8">
     <form action="{{ route('dogs.store', ['id' => \Auth::id()]) }}" method="post" enctype="multipart/form-data">
       @csrf
-      <div class="form-group">
-        <label for="photo">愛犬の写真 </label>
-        <input type="file" name="photo">
+      <div class="form-group mb-2">
+        <label for="inputFile">愛犬の写真</label>
+        <div class="custom-file">
+          <input type="photo" class="custom-file-input" id="inputFile">
+          <label class="custom-file-label" for="inputFile" data-browse="参照">写真を選択（ドラッグ&ドロップ可）</label>
+        </div>
       </div>
       <div class="form-group">
         <label for="dog_name">名前</label>
@@ -42,7 +46,8 @@
       <button type="submit" class="btn btn-info">登録する</button>
     </form>
   </div>
-
+  </div>
+</div>
 
 <hr>
 @endsection

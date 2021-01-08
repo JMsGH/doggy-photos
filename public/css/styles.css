@@ -62,7 +62,8 @@ div.pagebody {
   border-width: 2px;
 }
 
-a.btn-link {
+a.btn-link,
+input.btn-link {
   display: inline-block;
   border-radius: 5%;
   /* 角丸       */
@@ -86,7 +87,8 @@ a.btn-link {
   /* 枠の指定 */
 }
 
-a.btn-link:hover {
+a.btn-link:hover,
+input.btn-link:hover {
   color: #007fff;
   /* 背景色     */
   background: #ffffff;
@@ -173,4 +175,12 @@ a.btn-detail:hover {
 
 .card-header-color {
   background-color: #c7ecee;
+}
+
+.font-smaller {
+  font-size: 0.8rem;
+}
+
+.content-centering {
+  justify-content: center;
 }

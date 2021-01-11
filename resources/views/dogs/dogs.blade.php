@@ -45,8 +45,16 @@
               {{-- 登録内容修正ページへのリンク --}}
               <div class="row">
               <div class="col-sm-7">
-                {!! link_to_route('dogs.edit', '登録内容を修正', ['dogId' => $dog->id], ['class' => 'btn-edit']) !!}
+                {!! link_to_route('dogs.edit', '登録内容を修正', ['dogId' => $dog->id], ['class' => 'btn-edit mb-2']) !!}
+              
+                {{-- 体重記録へのリンク --}}
+                {!! link_to_route('weights.show', '体重記録ページへ',  ['dogId' => $dog->id], ['class' => 'btn-edit']) !!}
+                
+                {{-- 体重入力ページへのリンク --}}
+                {!! link_to_route('weights.create', '体重入力ページへ',  ['dogId' => $dog->id], ['class' => 'btn-edit']) !!}
+              
               </div>
+              
               <div class="col-sm-5">
                 {{-- 愛犬登録解除ボタンのフォーム --}}
                 {!! Form::open(['route' => ['dogs.destroy', $dog->id], 'method' => 'delete']) !!}

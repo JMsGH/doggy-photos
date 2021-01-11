@@ -181,6 +181,31 @@ a.btn-detail:hover {
   font-size: 0.8rem;
 }
 
+.font-twice-larger {
+  font-size: 2rem;
+}
+
 .content-centering {
   justify-content: center;
+}
+
+.br-label {
+  white-space: pre-line;
+  height: 150%;
+}
+
+.inline-display {
+  display: inline-block;
+}
+
+.display-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.smallest-img {
+  width: 100px;
+  height: auto;
+  margin-right: 20px;
 }

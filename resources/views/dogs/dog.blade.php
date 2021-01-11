@@ -44,6 +44,8 @@
               <div class="row">
               <div class="col-sm-7">
                 {!! link_to_route('dogs.edit', '登録内容修正', ['dogId' => $dog->id], ['class' => 'btn-edit']) !!}
+                {{-- 体重記録ページへのリンク --}}
+                {!! link_to_route('weights.create', '体重記録ページへ',  ['dogId' => $dog->id], ['class' => 'btn-edit']) !!}                
               </div>
               <div class="col-sm-5">
                 {{-- 愛犬登録解除ボタンのフォーム --}}
@@ -51,6 +53,7 @@
                     {!! Form::submit('登録を削除', ['class' => 'btn btn-danger btn-sm post-button']) !!}
                 {!! Form::close() !!}
               </div>
+              
             @endif
           </div>
         </div>

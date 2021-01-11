@@ -56,4 +56,12 @@ class Dog extends Model
       {
           return Carbon::parse($value)->format('Y/m/d');
       }
+      
+    /**
+     * この犬に属する体重レコード（Weightモデルとの関係を定義）
+     */
+     public function weights() 
+     {
+       return $this->hasMany(Weight::class);
+     }
 }

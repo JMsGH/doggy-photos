@@ -69,9 +69,7 @@ Route::group(['middleware' => ['auth']], function (){
   Route::get('medications.medications_show', 'FilariasisMedicationsController@show')->name('medications.show');
   
   
-  
-  
-  // 愛犬の写真を登録･変更するルート
+  // 愛犬関連の登録･変更するルート
   Route::post('dogs.dogs', 'DogsController@storePhoto')->name('dogs.photo');
   
   Route::resource('dogs', 'DogsController', ['only' => ['destroy', 'store', 'update']]);
@@ -80,7 +78,14 @@ Route::group(['middleware' => ['auth']], function (){
     Route::get('/', 'DogsController@show')->name('dogs.dog');
     
   });
-
+  
+  // 愛犬の体重を記録、表示するルート
+  Route::group(['prefix' => '{dogId}'], function () {
+    Route::resource('weights', 'WeightController', ['only' => ['create', 'store', 'update', 'destroy']]);
+    Route::get('weights.show', 'WeightController@show')->name('weights.show');
+  
+  
+  });
   
 
   

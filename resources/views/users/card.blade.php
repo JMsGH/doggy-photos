@@ -21,7 +21,7 @@
         <p class="text-right font-smaller inline-display">（ドラッグ&ドロップ可）</p>
       </div>
       
-      	{!! Form::submit(($user->photo) ? '変更する' : '登録する', ['class'=>'btn btn-info mt-1 mb-2']) !!}
+      	{!! Form::submit(($user->photo) ? '変更する' : '登録する', ['class'=>'btn btn-info btn-sm mt-1 mb-2']) !!}
       {!! Form::close() !!}
       
       {{-- 愛犬登録ページへのリンク --}}

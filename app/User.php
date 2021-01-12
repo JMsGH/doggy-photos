@@ -95,7 +95,7 @@ class User extends Authenticatable
     public function unfollow($userId)
     {
         // すでにフォローしているかの確認
-        $exist = $this->is_follwing($userId);
+        $exist = $this->is_following($userId);
         // 相手が自分自身かどうかの確認
         $its_me = $this->id == $userId;
         

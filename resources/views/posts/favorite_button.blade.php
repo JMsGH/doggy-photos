@@ -4,13 +4,13 @@
 @if (Auth::user()->is_favorite($post->id))
   {{--お気に入りを外すボタンのフォーム--}}
   {!! Form::open(['route' => ['post.unfavorite', $post->id], 'method' => 'delete']) !!}
-    {!! Form::submit('お気に入り解除', ['class' => "btn btn-sm btn-outline-danger post-button"]) !!}
+    {!! Form::submit('&#xf004;', ['class' => "fas fav transp-btn"]) !!}
   {!! Form::close() !!}
 
 @else
   {{--お気に入りにするボタンのフォーム--}}
   {!! Form::open(['route' => ['post.favorite', $post->id]]) !!}
-    {!! Form::submit('お気に入りにする❤', ['class' => "btn btn-sm btn-outline-success post-button"]) !!}
+    {!! Form::submit('&#xf004;', ['class' => "far unfav transp-btn"]) !!}
   {!! Form::close() !!}
 @endif
 </div>

@@ -1,5 +1,12 @@
 @charset "UTF-8";
 
+/* サイト全体のフォント指定 */
+
+body {
+  font-family: sans-serif,
+  'Font Awesome 5 Free',
+}
+
 img {
   object-fit: contain;
 }
@@ -67,7 +74,7 @@ input.btn-link {
   display: inline-block;
   border-radius: 5%;
   /* 角丸       */
-  font-size: 12pt;
+  font-size: 0.9rem;
   /* 文字サイズ */
   text-align: center;
   /* 文字位置   */
@@ -81,10 +88,12 @@ input.btn-link {
   /* 文字色     */
   line-height: 1em;
   /* 1行の高さ  */
+  opacity: 1;
+  /* 透明度     */
   transition: .3s;
   /* なめらか変化 */
-  border: 2px solid #007fff;
-  /* 枠の指定 */
+  box-shadow: 2px 2px 3px #666666;
+  /* 影の設定 */
 }
 
 a.btn-link:hover,
@@ -107,13 +116,13 @@ a.btn-edit {
   display: inline-block;
   border-radius: 5%;
   /* 角丸       */
-  font-size: 11pt;
+  font-size: 0.9rem;
   /* 文字サイズ */
   text-align: center;
   /* 文字位置   */
   cursor: pointer;
   /* カーソル   */
-  padding: 10px 12px;
+  padding: 10px 10px;
   /* 余白       */
   background: #00a2e8;
   /* 背景色     */
@@ -146,7 +155,7 @@ a.btn-detail {
   /* 文字位置   */
   cursor: pointer;
   /* カーソル   */
-  padding: 10px 12px;
+  padding: 10px 10px;
   /* 余白       */
   background: #686de0;
   /* 背景色     */
@@ -207,5 +216,53 @@ a.btn-detail:hover {
 .smallest-img {
   width: 100px;
   height: auto;
-  margin-right: 20px;
+}
+
+.dog-profile-normal {
+  max-height: 400px;
+  width: auto;
+}
+
+.center {
+  text-align: center;
+}
+
+.right {
+  text-align: right;
+}
+
+.btn-right {
+  display: inline-block;
+  margin: 0 0 0 auto;
+}
+
+.user-profile-list {
+  max-height: 300px;
+  width: auto;
+}
+
+.fav {
+  width: 50px;
+  height: 40px;
+  font-size: 1.2rem;
+  font-family: FontAwesome;
+  color: hotpink;
+}
+
+.unfav {
+  width: 50px;
+  height: 40px;
+  font-size: 1.2rem;
+  font-family: FontAwesome;
+}
+
+.transp-btn {
+  width: 50px;
+  height: 40px;
+  background: #E3FDFD;
+  border-color: #E3FDFD;
+}
+
+.awesome {
+  font-family: FontAwesome;
 }

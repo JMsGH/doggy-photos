@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="pagebody">
-<h2 class="text-center mt-5 mb-5">うちの犬（たち） <i class="fas fa-paw"></i></h2>
+<h2 class="text-center mt-5 mb-5">うちの犬（たち） <i class="fas fa-paw awesome"></i></h2>
   @if (is_countable($dogs))
   <ul class="list-unstyled">
     @foreach ($dogs as $dog)
@@ -10,17 +10,28 @@
         <div class="col-sm-5 mb-4">
         {{-- 愛犬登録の画像を取得して表示 --}}
         @if (isset($dog->photo)) 
-          <img class="mr-2 rounded img-fluid following" src="{{$dog->photo}}" alt="愛犬の写真">
+          <div class="center mb-2">
+            <img class="mr-2 rounded img-fluid following dog-profile-normal" src="{{$dog->photo}}" alt="愛犬の写真">
+          </div>
           {{-- 愛犬の写真を登録／変更 --}}
-          @if (\Auth::id() == $dog->user_id)
-          {!! Form::open(['route'=>'dogs.photo', 'enctype'=>'multipart/form-data']) !!}
-          <div class="form-group">
-            {!! Form::label('photo', ($dog->photo) ? '写真を変更' : '写真を登録', ['class'=>'font-weight-bold']) !!}
-            {!! Form::file('photo') !!}
-            {!! Form::hidden('dogId', $dog->id) !!}
-            {!! Form::submit(($dog->photo) ? '変更する' : '登録する', ['class'=>'btn btn-info']) !!}
-          {!! Form::close() !!}
-          @endif
+          <div class="custom-file">
+            @if (\Auth::id() == $dog->user_id)
+            {!! Form::open(['route'=>'dogs.photo', 'enctype'=>'multipart/form-data']) !!}
+            <div class="form-group">
+              {!! Form::file('photo', ['class'=>'custom-file-input', 'id'=>'inputFile']) !!}
+              {!! Form::label('photo', ($dog->photo) ? '写真を変更' : '写真を登録', ['class'=>'custom-file-label', 'for' => 'inputFile', 'data-browse'=>'参照']) !!}
+              <div class="row mt-2">
+                <div class="col-sm-8">
+                  <p class="font-smaller inline-display">（ドラッグ&ドロップ可）</p>  
+                  {!! Form::hidden('dogId', $dog->id) !!}
+                </div>
+                <div class="col-sm-4 right">
+                  {!! Form::submit(($dog->photo) ? '変更する' : '登録する', ['class'=>'btn btn-info btn-sm btn-right']) !!}
+                </div>
+              </div>
+            {!! Form::close() !!}
+            @endif
+            </div>
           </div>
         @endif
         </div>
@@ -48,10 +59,10 @@
                 {!! link_to_route('dogs.edit', '登録内容を修正', ['dogId' => $dog->id], ['class' => 'btn-edit mb-2']) !!}
               
                 {{-- 体重記録へのリンク --}}
-                {!! link_to_route('weights.show', '体重記録ページへ',  ['dogId' => $dog->id], ['class' => 'btn-edit']) !!}
+                {!! link_to_route('weights.show', '体重記録ページ',  ['dogId' => $dog->id], ['class' => 'btn-edit mb-2']) !!}
                 
                 {{-- 体重入力ページへのリンク --}}
-                {!! link_to_route('weights.create', '体重入力ページへ',  ['dogId' => $dog->id], ['class' => 'btn-edit']) !!}
+                {!! link_to_route('weights.create', '体重入力ページ',  ['dogId' => $dog->id], ['class' => 'btn-edit']) !!}
               
               </div>
               

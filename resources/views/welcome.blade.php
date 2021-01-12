@@ -8,7 +8,7 @@
                 <img src="https://dog-photos-bucket.s3-ap-northeast-1.amazonaws.com/welcome_page_img.png" class="profile-img rounded-circle img-thumbnail border-0">
             </div>
             <div class="col-sm-6 align-items-center">
-                <h1 class="text-center animated bounceInDown">犬フォト！ <i class="fas fa-paw"></i></h1>
+                <h1 class="text-center animated bounceInDown">犬フォト！ <i class="fas fa-paw awesome"></i></h1>
             </div>
         </div>
         

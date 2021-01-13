@@ -6,11 +6,11 @@ use Illuminate\Http\Request;
 use App\FilariasisMedication; // 追加
 use App\AdministeredDate; // 追加
 use App\User; // 追加
-use Illuminate\Notifications\Notifiable; // 追加
+// use Illuminate\Notifications\Notifiable; // 追加
 
 class FilariasisMedicationsController extends Controller
 {
-    use Notifiable;
+    // use Notifiable;
 
     // 認証済みユーザ（閲覧者）の投薬開始日･回数設定ページを表示
     public function input()
@@ -31,6 +31,7 @@ class FilariasisMedicationsController extends Controller
       
       // 認証済みユーザ（閲覧者）の投薬スケジュールとして作成（リクエストされた値をもとに作成）
       $medication->user_id = \Auth::id();
+      // dd($request->start_date);
       $medication->start_date = $request->start_date;
       $medication->number_of_times = $request->number_of_times;
       
@@ -124,7 +125,8 @@ class FilariasisMedicationsController extends Controller
       
       $med = FilariasisMedication::find($medId);
       $currentDate = $med->start_date;
-      $med->start_date = $currentDate->addDay(31);
+      // $med->start_date = $currentDate->addDay(31);
+      $med->start_date = date('Y-m-d', strtotime($currentDate . '+31 days'));
       
       $currentCounter = $med->counter;
       $med->counter = $currentCounter + 1;
@@ -139,17 +141,6 @@ class FilariasisMedicationsController extends Controller
       
     }
     
-    // 投薬日当日にリマインダーメールを送る
-    // public function reminder(Request $request)
-    // {
-    //   $userId = \Auth::id();
-    //   $user = \App\User::findOrFail($userId);
-    //   $userEmail = $user->email;
-      
-    //   $medId = \App\FilariasisMedication::findOrFail($id);
-      
-    //   $userEmail->notifyAt(new ReminderMail, Carbon::parse($medId->start_date));
-    // }
     
     
 }

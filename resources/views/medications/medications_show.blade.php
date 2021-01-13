@@ -38,7 +38,8 @@
         <li class="list-group-item med-date">
           <div class="row justify-content-md-left">
           <div class="col-sm-3 text-left">
-          {{ ($data->start_date->format('Y/m/d')) . '　' }}
+          {{-- {{ $data->start_date->format('Y/m/d')) . '　' }} --}}
+          {{ date('Y-m-d', strtotime($data->start_date)) }}
           </div>
           
           @if (date("Y-m-d H:i:s") > ($data->start_date))
@@ -72,9 +73,11 @@
         @while($i < (($data->number_of_times)-1-($data->counter)))
         <li class="list-group-item med-date text-left">
           <div style="display: none;">
-          {{ $data->start_date = ($data->start_date->addDay(31)) }}
+          {{-- {{ $data->start_date = ($data->start_date->addDay(31)) }} --}}
+          {{ $data->start_date = date('Y-m-d', strtotime($data->start_date . '+31 days')) }}
           </div>
-          {{ $data->start_date->format('Y/m/d') }}
+          {{-- {{ $data->start_date->format('Y-m-d') }} --}}
+          {{ date('Y-m-d', strtotime($data->start_date)) }}
           <div style="display: none;">
           {{ $i++ }}
           </div>

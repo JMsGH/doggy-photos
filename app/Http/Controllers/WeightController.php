@@ -35,12 +35,40 @@ class WeightController extends Controller
     
     $weight->save();
     
-    $data = Weight::where('dog_id', $dogId)
+    $logs = Weight::where('dog_id', $dogId)
       ->orderBy('date_weighed', 'asc')
       ->get();
       
     // 体重表示ページへ移動
-    return view('weights.show', compact('data'));
+    // return view('weights.show', compact('logs'));
+    $dog = \App\Dog::find($dogId);
+    $photo = $dog->photo;
+    
+    $weightLogs = [];
+    $dateLabels = [];
+    
+    // dd($data);
+    foreach($logs as $log){
+      $weight = $log->weight;
+      $dateLabel = $log->date_weighed;
+      array_push($weightLogs, $weight);
+      array_push($dateLabels, $dateLabel);
+    }
+    
+    // dd($dateLabels, $weightLogs);
+    
+    // $targetDays = [$data->date_weighed];
+    // dd($targetDays);
+    
+    
+    // viewに体重データを渡す
+    return view('weights.show', [
+      'dog_id' => $dogId,
+      'logs' => $logs,
+      'weight_logs' => $weightLogs,
+      'date_labels' => $dateLabels,
+      'photo' => $photo
+    ]);
   }
   
   public function show($dogId)

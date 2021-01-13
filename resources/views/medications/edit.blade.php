@@ -11,7 +11,7 @@
         @csrf
         <div class="form-group">
           <input type="hidden" name="id" value="{{ $id }}">
-          <input class="form-control" type="date" name="start_date"></input>
+          <input class="form-control" type="text" name="start_date"  id="datepicker"></input>
         </div>
         <button type="submit" class="btn btn-info">変更する</button>
         </table>
@@ -20,6 +20,17 @@
     </div>
   </div>
 </div>
+
+{{-- Bootstrap Datepickerのjsコード --}}
+<script type="text/javascript">
+  $('#datepicker').datepicker({
+    format: "yyyy/mm/dd",
+    todayBtn: "linked",
+    clearBtn: true,
+    todayHighlight: true,
+    language: 'ja'
+    });
+</script>
         
 
 @endsection

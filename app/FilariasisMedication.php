@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
  // 追加
 use App\AdministeredDate;
 use App\User;
-use Illuminate\Notifications\Notifiable; 
-use App\Notifications\ReminderMail; 
+// use Illuminate\Notifications\Notifiable; 
+// use App\Notifications\ReminderMail; 
 
 class FilariasisMedication extends Model
 {
@@ -19,10 +19,10 @@ class FilariasisMedication extends Model
     ];
     
     protected $dates = [
-      'start_date',  
+      'start_date' => 'date:Y-m-d', 
     ];
     
-    use Notifiable;
+    // use Notifiable;
 
   
     /**

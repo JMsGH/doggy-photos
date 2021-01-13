@@ -15,7 +15,7 @@
                   <tr>
                     <th scope="row">日付</th>
                     <td>
-                      <input type="date" name="date_weighed"/>
+                      <input type="text" name="date_weighed" id="datepicker"/>
                     </td>
                   </tr>
                   <tr>
@@ -34,5 +34,16 @@
       </div>
   </div>
 </div>
+
+{{-- Bootstrap Datepickerのjsコード --}}
+<script type="text/javascript">
+  $('#datepicker').datepicker({
+    format: "yyyy/mm/dd",
+    todayBtn: "linked",
+    clearBtn: true,
+    todayHighlight: true,
+    language: 'ja'
+    });
+</script>
 
 @endsection

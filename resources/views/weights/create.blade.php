@@ -5,8 +5,15 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-sm-6">
-      <div class="card">
-        <div class="card-header bg-info text-white font-weight-bolder" >体重記録フォーム</div>
+      <div class="card mt-4">
+        <div class="card-header bg-info text-white font-weight-bolder inline-display center font-larger" >
+          体重記録フォーム 
+          @if (isset($dog->photo)) 
+          <div class="center mb-2 inline-display">
+            <img class="mr-2 rounded img-fluid following smallest-img" src="{{$dog->photo}}" alt="{{ $dog->name }}">
+          </div>
+          @endif
+        </div>
           <div class="card-body">
             <form action="{{ route('weights.store', ['dogId' => $dog->id]) }}" method="post">
               @csrf
@@ -27,7 +34,7 @@
                 </tbody>
               </table>
               <input type="hidden" name="dogId" value="{{ $dog->id }}">
-              <button class="text-right btn btn-primary" type="submit">登録する</button>
+              <button class="btn-block-right btn btn-info" type="submit">登録する</button>
             </form>
           </div>
         </div>

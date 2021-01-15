@@ -9,12 +9,12 @@
         <img class="img-fluid mb-2" src="{{ $post->photo }}" alt="投稿写真"></a>
 
           <div class="row">
-            <div class="col-sm-6">
+            <div class="col-6">
             {{-- お気に入り／お気に入り解除ボタン --}}
             @include('posts.favorite_button')
             </div>
             
-            <div class="col-sm-6">
+            <div class="col-6">
             {{-- 投稿削除ボタンのフォーム --}}
             @include('posts.posts_delete_form')
             </div>

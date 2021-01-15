@@ -48,34 +48,37 @@
           <div>
           <p>{{ $dog->comment }}</p>
           </div>
-          <div>
-          {{-- 愛犬詳細ページへのリンク --}}
-          <p>{!! link_to_route('dogs.dog', '愛犬詳細を表示', ['dogId' => $dog->id], ['class' => 'btn-detail']) !!}</p>
-          <div>
-            @if (Auth::id() == $dog->user_id)
-              {{-- 登録内容修正ページへのリンク --}}
-              <div class="row">
-              <div class="col-sm-7">
-                {!! link_to_route('dogs.edit', '登録内容を修正', ['dogId' => $dog->id], ['class' => 'btn-edit mb-2']) !!}
-              
-                {{-- 体重記録へのリンク --}}
-                {!! link_to_route('weights.show', '体重記録ページ',  ['dogId' => $dog->id], ['class' => 'btn-edit mb-2']) !!}
+          <div class="row">
+            <div class="col-sm-7">
+              <div>
+                {{-- 愛犬詳細ページへのリンク --}}
+                {!! link_to_route('dogs.dog', '愛犬詳細を表示', ['dogId' => $dog->id], ['class' => 'btn-detail mb-2']) !!}
+              </div>
+              <div>
+                @if (Auth::id() == $dog->user_id)
+                  {{-- 登録内容修正ページへのリンク --}}
+                  <div>
+                  {!! link_to_route('dogs.edit', '登録内容を修正', ['dogId' => $dog->id], ['class' => 'btn-edit mb-2']) !!}
+                  </div>
                 
-                {{-- 体重入力ページへのリンク --}}
-                {!! link_to_route('weights.create', '体重入力ページ',  ['dogId' => $dog->id], ['class' => 'btn-edit']) !!}
-              
+                  {{-- 体重記録へのリンク --}}
+                  {!! link_to_route('weights.show', '体重記録ページ',  ['dogId' => $dog->id], ['class' => 'btn-weight mb-2']) !!}
+                  
+                  {{-- 体重入力ページへのリンク --}}
+                  {!! link_to_route('weights.create', '体重入力ページ',  ['dogId' => $dog->id], ['class' => 'btn-weight']) !!}
+                </div>
               </div>
-              
+                
               <div class="col-sm-5">
-                {{-- 愛犬登録解除ボタンのフォーム --}}
-                {!! Form::open(['route' => ['dogs.destroy', $dog->id], 'method' => 'delete']) !!}
-                    {!! Form::submit('登録を削除', ['class' => 'btn btn-danger post-button']) !!}
-                {!! Form::close() !!}
+                  {{-- 愛犬登録解除ボタンのフォーム --}}
+                  {!! Form::open(['route' => ['dogs.destroy', $dog->id], 'method' => 'delete']) !!}
+                      {!! Form::submit('登録を削除', ['class' => 'btn btn-danger post-button']) !!}
+                  {!! Form::close() !!}
               </div>
-            @endif
+              @endif
+            </div>
           </div>
         </div>
-      </div>
     </div>
 
     <hr class="long">

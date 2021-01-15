@@ -124,7 +124,7 @@ a.btn-edit {
   /* カーソル   */
   padding: 10px 10px;
   /* 余白       */
-  background: #00a2e8;
+  background: #51adcf;
   /* 背景色     */
   color: #ffffff;
   /* 文字色     */
@@ -157,7 +157,7 @@ a.btn-detail {
   /* カーソル   */
   padding: 10px 10px;
   /* 余白       */
-  background: #686de0;
+  background: #0278ae;
   /* 背景色     */
   color: #ffffff;
   /* 文字色     */
@@ -178,6 +178,39 @@ a.btn-detail:hover {
   /* カーソル時透明度 */
 }
 
+a.btn-weight {
+  display: inline-block;
+  border-radius: 5%;
+  /* 角丸       */
+  font-size: 0.9rem;
+  /* 文字サイズ */
+  text-align: center;
+  /* 文字位置   */
+  cursor: pointer;
+  /* カーソル   */
+  padding: 10px 10px;
+  /* 余白       */
+  background: #28abb9;
+  /* 背景色     */
+  color: #ffffff;
+  /* 文字色     */
+  line-height: 1em;
+  /* 1行の高さ  */
+  opacity: 1;
+  /* 透明度     */
+  transition: .3s;
+  /* なめらか変化 */
+  box-shadow: 2px 2px 3px #666666;
+  /* 影の設定 */
+}
+
+a.btn-weight:hover {
+  box-shadow: none;
+  /* カーソル時の影消去 */
+  opacity: 0.8;
+  /* カーソル時透明度 */
+}
+
 .lil-darker-color {
   background-color: #7ed6df;
 }
@@ -188,6 +221,10 @@ a.btn-detail:hover {
 
 .font-smaller {
   font-size: 0.8rem;
+}
+
+.font-larger {
+  font-size: 1.5rem;
 }
 
 .font-twice-larger {
@@ -233,6 +270,11 @@ a.btn-detail:hover {
 
 .btn-right {
   display: inline-block;
+  margin: 0 0 0 auto;
+}
+
+.btn-block-right {
+  display: block;
   margin: 0 0 0 auto;
 }
 

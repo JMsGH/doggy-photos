@@ -15,7 +15,9 @@ class WeightController extends Controller
     $dog = \App\Dog::findOrFail($dogId);
     
     // 体重入力ページを表示
-    return view('weights.create', ['dog' => $dog]);
+    return view('weights.create', [
+      'dog' => $dog
+    ]);
   }
   
   public function store(Request $request, $dogId)

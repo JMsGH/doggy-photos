@@ -88,13 +88,16 @@ class WeightController extends Controller
       
       $weightLogs = [];
       $dateLabels = [];
+      $weightIds = [];
       
       // dd($data);
       foreach($logs as $log){
         $weight = $log->weight;
         $dateLabel = $log->date_weighed;
+        $weightId = $log->id;
         array_push($weightLogs, $weight);
         array_push($dateLabels, $dateLabel);
+        array_push($weightIds, $weightId);
       }
       
       // dd($dateLabels, $weightLogs);
@@ -109,6 +112,7 @@ class WeightController extends Controller
         'logs' => $logs,
         'weight_logs' => $weightLogs,
         'date_labels' => $dateLabels,
+        'weight_ids' => $weightIds,
         'photo' => $photo
       ]);
     
@@ -139,4 +143,16 @@ class WeightController extends Controller
   //   ];
   // }
   
+  public function update(Request $reqest, $dogId) {
+    
+    $dog = \App\Dog::find($dogId);
+    
+    // バリデーション
+    $request->validate([
+      'date_weighed' => 'required', 
+      'weight' => 'required | numeric | gte:0',
+    ]);
+    
+    
+  }
 }

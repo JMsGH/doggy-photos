@@ -4,7 +4,7 @@
 
 {{-- フラッシュメッセージ --}}
 @if (session('flash_message'))
-    <div class="flash_message bg-info text-center py-2 my-0 mb-5">
+    <div class="bg-info text-center py-2 my-0 mb-5" id="flash_message">
         {{ session('flash_message') }}
     </div>
 @endif
@@ -60,10 +60,10 @@
                     
                     <div>
                     {{-- 体重記録ページへのリンク --}}
-                    {!! link_to_route('weights.show', '体重記録ページ',  ['dogId' => $dog->id], ['class' => 'btn-edit mb-3']) !!}
+                    {!! link_to_route('weights.show', '体重記録ページ',  ['dogId' => $dog->id], ['class' => 'btn-edit mb-2']) !!}
                     
                     {{-- 体重入力ページへのリンク --}}
-                    {!! link_to_route('weights.create', '体重入力ページ',  ['dogId' => $dog->id], ['class' => 'btn-edit']) !!}                    
+                    {!! link_to_route('weights.create', '体重入力ページ',  ['dogId' => $dog->id], ['class' => 'btn-edit mb-2']) !!}                    
                     </div>
                     
                     {{-- 愛犬一覧ページへのリンク --}}
@@ -86,6 +86,12 @@
   {{-- ページネーションのリンク --}}
   {{-- {{ $dogs->links() }} --}}
 
-  
+{{-- <script>
+    @if (session('flash_message'))
+            $(function () {
+                    toastr.success('{{ session('flash_message') }}');
+            });
+    @endif
+</script> --}}
   
 @endsection

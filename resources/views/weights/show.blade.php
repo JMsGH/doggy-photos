@@ -2,6 +2,13 @@
 
 @section('content')
 
+{{-- フラッシュメッセージ --}}
+@if (session('flash_message'))
+    <div class="bg-info text-center py-2 my-0 mb-5" id="flash_message">
+        {{ session('flash_message') }}
+    </div>
+@endif
+
 
 <div class="display-flex mb-4">
   @if (isset($photo)) 
@@ -120,7 +127,7 @@
               {
                 $(this).find('#datepicker').val(weightDate);
                 $(this).find('#weight_log').val(weightLog);
-                $(this).find('#weight_id').val(weightId);
+                $(this).find('#weightId').val(weightId);
               });
               
               $('#weightModal').modal('show');
@@ -133,9 +140,11 @@
      });
     </script>  
      <!-- グラフを描画ここまで -->
+  <!-- 体重データ更新後に表示 -->
+  <div id="weightUpdate"></div>
   <!-- Modal -->
   <div class="modal fade" id="weightModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="dialog">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="modalCenterTitle">体重データの修正・削除</h5>
@@ -145,32 +154,35 @@
         </div>
         <div class="modal-body">
           <div class="card-body">
-            {{-- <form action="{{ route('weights.update', ['weightId' => $weighId]) }}" method="patch">
-              @csrf --}}
+           <form id="weightRevisionForm" name="weightRevision" role="form">
               <table class="table">
                 <tbody>
                   <tr>
+                    <th scope="row">weight_id</th>
+                    <td>
+                      <input type="hidden" name="weight_id" id="weightId" />
+                    </td>
+                  </tr>
+                  <tr>
                     <th scope="row">日付</th>
                     <td>
-                      <input type="text" name="date_weighed" id="datepicker" {{-- value="" --}} />
+                      <input type="text" name="date_weighed" id="datepicker" />
                     </td>
                   </tr>
                   <tr>
                     <th scope="row">体重（kg）</th>
                     <td>
-                      <input type="text" name="weight" id="weight_log" {{-- value="{{ $weightLog }}" --}}/>
-                      <input type="text" name="weight_id" id="weight_id" />
+                      <input type="text" name="weight" id="weight_log"/>
                     </td>
                   </tr>
                 </tbody>
               </table>
-
-            </form>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-          <button class="btn-block-right btn btn-info" type="submit">修正する</button>
+          <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#weightModal">閉じる</button>
+          <button class="btn-block-right btn btn-info" type="submit" id="revise-button">修正する</button>
+        </form>
         </div>
       </div>
     </div>
@@ -178,6 +190,44 @@
 
 @endif
 
-
+<script>
+  $(document).ready(function(){
+    $('#weightRevisionForm').submit(function(event){
+      submitForm();
+      return false;
+    });
+  });
+  
+  function submitForm() {
+    let weightId = $('#weightId').val(); // weight_idを取得
+    
+    $.ajax({
+      beforeSend: function(xhr) {
+        return xhr.setRequestHeader('X-CSRF-TOKEN', '{{csrf_token()}}');
+      },
+      type: 'POST',
+      url: '/weights/' + weightId,
+      cache: false,
+      data: $('form#weightRevisionForm').serialize(),
+      success: function(response){
+        $('#weightUpdate').html(response)
+        $('#weightModal').modal('hide');
+      },
+      error: function() {
+        alert('エラー');
+      }
+    });
+  }
+  
+  const reviseButton = document.getElementById('revise-button');
+  
+  // [修正する]ボタンをクリックするとイベントリスナーが実行される
+  // ★★★ ここから
+  reviseButton.addEventListner('click', { 
+    logs = @json($logs);
+    
+  });
+  
+</script>
 
 @endsection

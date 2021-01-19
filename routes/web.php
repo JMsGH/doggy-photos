@@ -81,17 +81,15 @@ Route::group(['middleware' => ['auth']], function (){
   
   // 愛犬の体重を記録、表示するルート
   Route::group(['prefix' => '{dogId}'], function () {
-    Route::resource('weights', 'WeightController', ['only' => ['create', 'store', 'update', 'destroy']]);
+    Route::resource('weights', 'WeightController', ['only' => ['create', 'store', 'destroy']]);
     Route::get('weights.show', 'WeightController@show')->name('weights.show');
-  
+
   
   });
   
-
+  // 体重データ更新後に表示するルート
+  Route::post('/weights/{weightId}', 'WeightController@update');
   
 
-  
-
-  
   
 });

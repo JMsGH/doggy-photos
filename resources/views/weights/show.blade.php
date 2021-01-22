@@ -212,8 +212,13 @@
       <div class="row">
         <div class="col-5"></div>
         <div class="col-7">
-          <div class="d-flex justify-content-end mt-4">
-            <div class="p-2">{!! link_to_route('dogs.index', '愛犬ページ', ['id' => \Auth::id()], ['class' => 'btn-detail ml2']) !!}
+          <div class="d-flex justify-content-end mt-2">
+            <div class="p-2">
+              {{ $weights->links() }}
+            </div>
+          </div>
+          <div class="d-flex justify-content-end">
+            <div class="p-2">{!! link_to_route('dogs.index', '愛犬ページ', ['id' => \Auth::id()], ['class' => 'btn-detail ml-2']) !!}
             </div>
           {{-- 体重入力ページへのリンク --}}
             <div class="p-2">
@@ -221,12 +226,7 @@
             </div>
             {{-- グラフ更新ボタン --}}
             <div class="p-2">
-              {!! link_to_route('weights.show', 'グラフを更新',  ['dogId' => $dog->id], ['class' => 'btn-weight mb-2']) !!}
-            </div>
-          </div>
-          <div class="d-flex justify-content-end">
-            <div class="p-2">
-              {{ $weights->links() }}
+              {!! link_to_route('weights.show', 'グラフを更新',  ['dogId' => $dog->id], ['class' => 'btn-weight ml-2 mb-2']) !!}
             </div>
           </div>
         </div>
@@ -240,7 +240,7 @@
       グラフの点をクリックして体重データの修正と削除ができます。修正、削除後は [グラフを更新] ボタンをクリックしてグラフを更新してください。
     </li>
     <li>
-      グラフにはデータが20件ずつ表示されます。次のデータを表示するには下部の [Next]を、前のデータを表示するには [Previous] をクリックしてください。
+      グラフにはデータが20件ずつ表示されます。前後のデータを表示するにはグラフの下にある [<] [>]または数字をクリックしてください。
     </li>
   </ul>
 

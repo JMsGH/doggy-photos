@@ -23,7 +23,7 @@
               </tr>
               <tr>
                 <th scope="row">誕生日</th>
-                <td>{!! Form::text('birthday', null, ['class' => 'datepicker form-control', 'id' => 'datepicker']) !!}
+                <td>{!! Form::text('birthday', null, ['class' => 'form-control', 'id' => 'dog-bd-datepicker']) !!}
                 </td>
               </tr>
               <tr>
@@ -45,38 +45,13 @@
   </div>
 </div>
 
+// <script src="{{ asset('/js/bsdatepicker.js') }}"></script>
+{{-- Bootstrap Datepickerのjsコード --}}
 <script type="text/javascript">
-  $('#datepicker').datepicker({
+  $('#dog-bd-datepicker').datepicker({
     format: "yyyy/mm/dd",
-    maxViewMode: 3,
-    todayBtn: true,
-    clearBtn: true,
-    language: "ja",
-    beforeShowDay: function(date){
-          if (date.getMonth() == (new Date()).getMonth())
-            switch (date.getDate()){
-              case 4:
-                return {
-                  tooltip: 'Example tooltip',
-                  classes: 'active'
-                };
-              case 8:
-                return false;
-              case 12:
-                return "green";
-          }
-        },
-    beforeShowMonth: function(date){
-          if (date.getMonth() == 8) {
-            return false;
-          }
-        },
-    beforeShowYear: function(date){
-          if (date.getFullYear() == 2007) {
-            return false;
-          }
-        }
-    });
+    language: "ja"
+});
 </script>
 
 @endsection

@@ -255,6 +255,11 @@ a.btn-weight:hover {
   height: auto;
 }
 
+.ex-smallest-img {
+  width: 70px;
+  height: auto;
+}
+
 .dog-profile-normal {
   max-height: 400px;
   width: auto;

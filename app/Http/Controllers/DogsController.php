@@ -19,7 +19,7 @@ class DogsController extends Controller
         $user = \Auth::user();
         // ユーザの愛犬の一覧を作成日時の降順で取得
         $dogs = $user->dogs()->orderBy('created_at', 'desc')->paginate(5);
-        
+        //dd($dogs);
         $data = [
           'user' => $user,
           'dogs' => $dogs,
@@ -78,7 +78,8 @@ class DogsController extends Controller
       }
       
       // 前のURLへリダイレクト
-      return back();
+      session()->flash('flash_message', '愛犬情報が削除されました');
+      return redirect('/');
     }
     
     public function create()
@@ -124,6 +125,8 @@ class DogsController extends Controller
       $userId = \Auth::id();
       $user = \Auth::user();
       $dog = \App\Dog::find($request->id);
+      
+      // dd($dog);
 
       
       // 愛犬一覧欄ページへリダイレクト

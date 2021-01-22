@@ -81,15 +81,17 @@ Route::group(['middleware' => ['auth']], function (){
   
   // 愛犬の体重を記録、表示するルート
   Route::group(['prefix' => '{dogId}'], function () {
-    Route::resource('weights', 'WeightController', ['only' => ['create', 'store', 'destroy']]);
+    Route::resource('weights', 'WeightController', ['only' => ['create', 'store']]);
     Route::get('weights.show', 'WeightController@show')->name('weights.show');
 
   
   });
   
   // 体重データ更新後に表示するルート
-  Route::post('/weights/{weightId}', 'WeightController@update');
-  
+  Route::post('/weights/update/{weightId}', 'WeightController@update');
+
+  // 体重データを削除するルート
+  Route::post('/weights/delete/{weightId}', 'WeightController@destroy');
 
   
 });

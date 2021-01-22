@@ -38,10 +38,10 @@
         <div class="col-sm-7">
           <div class="font-weight-bold">
           <h4 class="mb-3">{{ $dog->dog_name }}</h4>
-          @if ($dog->birthday)
-            <p>誕生日:  {{ $dog->birthday }} </p>
-          @else
+          @if (is_null($dog->birthday))
             <p>誕生日</p>
+          @else
+            <p>誕生日:  {{ $dog->birthday }} </p>            
           @endif
           <p>コメント:</p>
           </div>

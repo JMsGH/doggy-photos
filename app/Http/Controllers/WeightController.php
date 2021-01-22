@@ -37,24 +37,27 @@ class WeightController extends Controller
     
     $weight->save();
     
-    $logs = Weight::where('dog_id', $dogId)
-      ->orderBy('date_weighed', 'asc')
-      ->get();
+    $weights = Weight::where('dog_id', $dogId)
+      ->orderBy('date_weighed', 'asc')->paginate(20);
+          // ->get();
       
     // 体重表示ページへ移動
-    // return view('weights.show', compact('logs'));
+    // return view('weights.show', compact('weights'));
     $dog = \App\Dog::find($dogId);
     $photo = $dog->photo;
     
     $weightLogs = [];
     $dateLabels = [];
+    $weightIds = [];    
     
-    // dd($data);
-    foreach($logs as $log){
-      $weight = $log->weight;
-      $dateLabel = $log->date_weighed;
-      array_push($weightLogs, $weight);
+    foreach($weights as $weight){
+      $weightLog = $weight->weight;
+      $dateLabel = $weight->date_weighed;
+      $weightId = $weight->id;
+      array_push($weightLogs, $weightLog);
       array_push($dateLabels, $dateLabel);
+      array_push($weightIds, $weightId);
+      
     }
     
     // dd($dateLabels, $weightLogs);
@@ -65,10 +68,12 @@ class WeightController extends Controller
     
     // viewに体重データを渡す
     return view('weights.show', [
+      'dog' => $dog,
       'dog_id' => $dogId,
-      'logs' => $logs,
+      'weights' => $weights,
       'weight_logs' => $weightLogs,
       'date_labels' => $dateLabels,
+      'weight_ids' => $weightIds,
       'photo' => $photo
     ]);
   }
@@ -87,39 +92,43 @@ class WeightController extends Controller
     if (\Auth::id() == $userId) {
     
       if (Weight::where('dog_id', '=', $dogId)->count() > 0) {
-        $logs = Weight::where('dog_id', $dogId)
-          ->OrderBy('date_weighed', 'asc')
-          ->get();
+        $weights = Weight::where('dog_id', $dogId)
+          ->OrderBy('date_weighed', 'asc')->paginate(20);
+          // ->get();
         
         $weightLogs = [];
         $dateLabels = [];
         $weightIds = [];
         
         // dd($data);
-        foreach($logs as $log){
-          $weight = $log->weight;
-          $dateLabel = $log->date_weighed;
-          $weightId = $log->id;
-          array_push($weightLogs, $weight);
+        foreach($weights as $weight){
+          $weightLog = $weight->weight;
+          $dateLabel = $weight->date_weighed;
+          //dd($dateLabel);
+          $weightId = $weight->id;
+          array_push($weightLogs, $weightLog);
           array_push($dateLabels, $dateLabel);
           array_push($weightIds, $weightId);
         }
         
         // viewに体重データを渡す
         return view('weights.show', [
+          'dog' => $dog,
           'dog_id' => $dogId,
-          'logs' => $logs,
+          'weights' => $weights,
           'weight_logs' => $weightLogs,
           'date_labels' => $dateLabels,
           'weight_ids' => $weightIds,
           'photo' => $photo
         ]);
+        
+        
       
       // 体重データがない場合は$data=nullとしてビューを表示
       } else {
-        $logs = null;
+        $weights = null;
         return view('weights.show', [
-          'logs' => $logs,
+          'weights' => $weights,
           'dogId' => $dogId,
           'photo' => $photo
         ]);
@@ -133,8 +142,8 @@ class WeightController extends Controller
   }
     
 
-  public function update($weightId) {
-    
+  public function update($weightId) 
+  {
     $weight = \App\Weight::find($weightId);
     $dogId = $weight->dog_id;
     $dog = \App\Dog::find($dogId);
@@ -144,19 +153,71 @@ class WeightController extends Controller
     $weight->weight = strip_tags($_POST['weight']);
     $weight->save();
     
-    // session()->flash('flash_message', '体重データに合わせてグラフを再描画します');
-    // return view('weights.update', [
-    //   'dog' => $dog,
-    //   'dogId' => $dogId,
-    //   'weightId' => $weightId,
-    //   'weight' => $weight
-    // ]);
-    
-    $logs = Weight::where('dog_id', $dogId)
+    $weights = Weight::where('dog_id', $dogId)
           ->OrderBy('date_weighed', 'asc')
           ->get();
+          
+    session()->flash('flash_message', '修正したデータに合わせてグラフを再描画しました');
+    // return response()->json($weights);
     
-    return response()->json($logs);
+    return view('weights.update', [
+      'dog' => $dog,
+      'dogId' => $dogId,
+      'weightId' => $weightId,
+      'weight' => $weight
+    ]);
+
+  }  
+  
+  // 体重データの削除
+  public function destroy($weightId)
+  {
+    // idの値で検索して取得
+    $weight = \App\Weight::findOrFail($weightId);
+    
+    // 認証済みユーザ（閲覧者）がその体重データが所属する犬の所有者である場合体重データを削除
+    $dogId = $weight->dog_id;
+    $dog = \App\Dog::findOrFail($dogId);
+    $userId = $dog->user_id;
+    
+    //dd($weightId);
+    
+    if (\Auth::id() === $userId) {
+      $weight->delete();
+    }
+    
+    if (Weight::where('dog_id', '=', $dogId)->count() > 0) {
+      $weights = Weight::where('dog_id', $dogId)
+        ->OrderBy('date_weighed', 'asc')
+        ->get();
+      
+      // 前のURLへリダイレクト 
+      session()->flash('flash_message', '体重データを削除しました');
+      // return redirect(route('weights.show', [
+      //   'dog_id' => $dogId,
+      //   'logs' => $weights,
+      //   'weight_logs' => $weightLogs,
+      //   'date_labels' => $dateLabels,
+      //   'weight_ids' => $weightIds,
+      //   'photo' => $photo
+      // ]));
+      
+      return view('weights.delete', [
+        'dog' => $dog,
+        'dogId' => $dogId,
+      ]);
+    
+    // 体重データがない場合は$data=nullとしてビューを表示
+    } else {
+      $weights = null;
+      return view('weights.show', [
+        'weights' => $weights,
+        'dogId' => $dogId,
+        'photo' => $photo
+      ]);
+    }
     
   }
+
+  
 }

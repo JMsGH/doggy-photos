@@ -1,18 +1,8 @@
-@extends('layouts.app')
-
-@section('content')
 
 <div class="mt-5">
+  <h6 class="text-center mb-2">体重データを以下のように修正しました</h6>
   <div class="row justify-content-center">
     <div class="col-6">
-      
-      {{-- フラッシュメッセージ --}}
-      @if (session('flash_message'))
-          <div class="flash_message bg-info text-center py-2 my-0">
-              {{ session('flash_message') }}
-          </div>
-      @endif
-      
       <table class="table table-striped">
       <tbody>
         <tr>
@@ -28,6 +18,4 @@
     </div>
   </div>
 </div>
-
-@endsection
 

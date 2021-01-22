@@ -40,22 +40,23 @@ class Dog extends Model
       * 
       * @param string $value
       * @return string
-      */
+      
       public function getBirthdayAttribute($value)
       {
           return Carbon::parse($value)->format('Y/m/d');
       }
-      
+      */
       /**
      * Get the dog's date of birth for forms.
      *
      * @param  string  $value
      * @return string
-     */
+     
       public function formBirthdayAttribute($value)
       {
           return Carbon::parse($value)->format('Y/m/d');
       }
+    */
       
     /**
      * この犬に属する体重レコード（Weightモデルとの関係を定義）

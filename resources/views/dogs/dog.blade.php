@@ -4,7 +4,7 @@
 
 {{-- フラッシュメッセージ --}}
 @if (session('flash_message'))
-    <div class="bg-info text-center py-2 my-0 mb-5" id="flash_message">
+    <div class="flash_message bg-info text-center py-2 my-0 mb-5" id="flash_message">
         {{ session('flash_message') }}
     </div>
 @endif

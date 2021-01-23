@@ -38,6 +38,6 @@
       @include('posts.posts')
     </div>
   </div>
-  <script src="{{ asset('../../../public/js/main.js') }}"></script>
+  <script src="{{ asset('/js/main.js') }}"></script>
 
 @endsection

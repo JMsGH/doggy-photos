@@ -13,11 +13,17 @@ class WeightController extends Controller
   {
     // dd($dogId);
     $dog = \App\Dog::findOrFail($dogId);
+    $userId = $dog->user_id;
     
     // 体重入力ページを表示
-    return view('weights.create', [
-      'dog' => $dog
-    ]);
+    if (\Auth::id() == $userId) {
+      return view('weights.create', [
+        'dog' => $dog
+      ]);      
+    } else {
+      return view('/');
+    }
+
   }
   
   public function store(Request $request, $dogId)
@@ -134,9 +140,9 @@ class WeightController extends Controller
         ]);
       }
     } else {
-      session()->flash('flash_message', 'ご自分の愛犬の体重記録のみ表示できます');
-      return view('dogs.dog', [
-        'dog' => $dog,
+        session()->flash('flash_message', 'ご自分の愛犬の体重記録のみ表示できます');
+        return view('dogs.dog', [
+          'dog' => $dog,
       ]);
     }
   }

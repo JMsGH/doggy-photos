@@ -24,7 +24,7 @@
   </h5>
 
 
-@else  
+@else
 <div class="row justify-content-md-center">
   <div class="col-sm-8">
     
@@ -33,6 +33,26 @@
         {{ $data->counter }}回投薬済みです。残り{{ $data->number_of_times - $data->counter }}回です。
       @endif
     </h5>
+    
+    @if ((count($adminDates) == 0))
+    <div></div>
+    @else
+      <ul class="list-group">
+        @foreach($adminDates as $date)
+          <li class="list-group-item med-date">
+            <div class="row justify-content-md-left">
+              <div class="col-sm-3 text-left date-administered">  
+                  {{ $date->administered_date }}
+              </div>
+              <div class="col-sm-3 text-left date-administered">
+                  投薬完了
+              </div>
+            </div>
+          </li>
+        @endforeach
+      </ul>
+    @endif
+  
     
       <ul class="list-group">
         <li class="list-group-item med-date">
@@ -87,7 +107,8 @@
       </ul>
   </div>
 </div>
-  
+
+
 @endif
 
 @endsection

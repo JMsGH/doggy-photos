@@ -24,12 +24,14 @@
   </li>
   
   {{-- お気に入り一覧タブ --}}
+  @if (Auth::id() == $user->id)
   <li class="nav-item">
     <a href="{{ route('user.favorites', ['id' => $user->id]) }}" class="nav-link {{ Request::routeIs('user.favorites') ? 'active' : '' }}">
       お気に入り
       <span class="badge badge-secondary">{{ $user->favorites_count }}</span>
     </a>
   </li>
+  @endif
   
   {{-- ユーザ情報更ページ --}}
   @if (Auth::id() == $user->id)

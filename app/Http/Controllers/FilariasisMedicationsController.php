@@ -42,10 +42,14 @@ class FilariasisMedicationsController extends Controller
       $data = FilariasisMedication::where('user_id', $userId)
             ->orderBy('created_at', 'desc')
             ->first();
-      
+            
+      $adminDates = [];
       
       // 投薬日表示ページへ移動
-      return view('medications.medications_show', compact('data'));
+      return view('medications.medications_show', with([
+          'data' => $data,
+          'adminDates' => $adminDates
+      ]));
     }
     
     // 認証済みユーザ（閲覧者）の投薬予定・確認ページを表示
@@ -59,8 +63,16 @@ class FilariasisMedicationsController extends Controller
             ->orderBy('created_at', 'desc')
             ->first();
       
+      $medId = $data->id;
+            
+      $adminDates = \App\AdministeredDate::where('medication_id', $medId)->orderBy('administered_date', 'desc')->get();
+      
           // 取得した $data を viewに渡す
-          return view('medications.medications_show')->with(['data' => $data]);
+          return view('medications.medications_show')->with([
+            'data' => $data,
+            'medication' => $medId,
+            'adminDates' => $adminDates
+          ]);
         
         // データがない場合は start_date は null としてビューを表示
       } else {
@@ -101,9 +113,14 @@ class FilariasisMedicationsController extends Controller
       $med->start_date = $request->start_date;
       $med->save();
       
-      // 投薬予定日ページにリダイレクト
-      return redirect()->route('medications.show', ['id' => $userId, 'medication' => $medId]);
+      $adminDates = \App\AdministeredDate::where('medication_id', $medId)->orderBy('administered_date', 'desc')->get();
       
+      // 投薬予定日ページにリダイレクト
+      return redirect()->route('medications.show', [
+        'id' => $userId, 
+        'medication' => $medId,
+        'adminiDates' => $adminDates
+      ]);
     }
     
     // 投薬完了を確定させるアクション
@@ -123,6 +140,10 @@ class FilariasisMedicationsController extends Controller
       
       $adminDate->save();
       
+      $adminDates = \App\AdministeredDate::where('medication_id', $medId)->orderBy('administered_date', 'desc')->get();
+      
+      //dd($adminDates);
+      
       $med = FilariasisMedication::find($medId);
       $currentDate = $med->start_date;
       // $med->start_date = $currentDate->addDay(31);
@@ -137,7 +158,11 @@ class FilariasisMedicationsController extends Controller
 
       
       // 投薬予定日ページにリダイレクト
-      return redirect()->route('medications.show', ['id' => $userId, 'medication' => $medId]);
+      return redirect()->route('medications.show', [
+        'id' => $userId, 
+        'medication' => $medId,
+        'adminiDates' => $adminDates
+      ]);
       
     }
     

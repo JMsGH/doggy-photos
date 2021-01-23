@@ -29,6 +29,8 @@
   @endforeach
 
   </ul>
-  {{-- ページネーションのリンク --}}
-  {{ $users->links() }}
+  <div class="pagination justify-content-end mt-2">
+    {{-- ページネーションのリンク --}}
+    {{ $users->links() }}
+  </div>
 @endif

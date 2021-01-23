@@ -33,7 +33,7 @@
             <li class="dropdown-item">{!! link_to_route('dogs.create', '愛犬登録', ['id' => \Auth::id()]) !!}</li>
             {{-- 愛犬ページへのリンク --}}
             <li class="dropdown-item">{!! link_to_route('dogs.index', '愛犬ページ', ['id' => \Auth::id()]) !!}</li>            
-            {{-- お気に入り写真へのリンク --}}
+
             {{-- ログアウト --}}
             <li class="dropdown-item">{!! link_to_route('logout.get', 'ログアウト') !!}</li>
           </ul>

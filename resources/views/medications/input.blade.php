@@ -2,8 +2,8 @@
 
 @section('content')
 
-<h5>投薬開始日と投薬回数の設定</h5>
-  <div class="container"></div>
+<h4 class="mt-5 mb-4 text-center">投薬開始日と投薬回数の設定</h4>
+  <div class="row justify-content-center">
   <div class="col-sm-6">
     <form action="{{ route('medications.store', ['id' => \Auth::id()]) }}" method="post">
       @csrf
@@ -15,8 +15,9 @@
       <label for="number_of_times">投薬回数</label>
       <input type="text" name="number_of_times" class="form-control">   
     </div>
-    <button type="submit" class="btn btn-info">設定する</button>
+    <button type="submit" class="btn btn-info btn-block-right mt-4">設定する</button>
     </form>
+  </div>
   </div>
   
 

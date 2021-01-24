@@ -15,7 +15,7 @@ class PostsController extends Controller
       if (\Auth::check()) {
         // 認証済みの場合、postsテーブルの全データを取得
         
-        $posts = Post::orderBy('created_at', 'desc')->paginate(12);
+        $posts = Post::orderBy('created_at', 'desc')->paginate(9);
         
         $data = [
           'posts' => $posts,
@@ -37,7 +37,7 @@ class PostsController extends Controller
         // 認証済みの場合、認証済みユーザを取得
         $user = \Auth::user();
         // ユーザ投稿の一覧を作成日の降順で取得
-        $posts = $user->posts()->orderBy('created_at', 'desc')->paginate(12);
+        $posts = $user->posts()->orderBy('created_at', 'desc')->paginate(9);
         
         $data = [
           'user' => $user,

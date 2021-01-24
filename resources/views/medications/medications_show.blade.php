@@ -41,10 +41,10 @@
         @foreach($adminDates as $date)
           <li class="list-group-item med-date">
             <div class="row justify-content-md-left">
-              <div class="col-sm-3 text-left date-administered">  
+              <div class="col-4 text-left date-administered">  
                   {{ $date->administered_date }}
               </div>
-              <div class="col-sm-3 text-left date-administered">
+              <div class="col-7 text-left date-administered">
                   投薬完了
               </div>
             </div>
@@ -57,13 +57,13 @@
       <ul class="list-group">
         <li class="list-group-item med-date">
           <div class="row justify-content-md-left">
-          <div class="col-sm-3 text-left">
+          <div class="col-4 text-left">
           {{-- {{ $data->start_date->format('Y/m/d')) . '　' }} --}}
           {{ date('Y-m-d', strtotime($data->start_date)) }}
           </div>
           
           @if (date("Y-m-d H:i:s") > ($data->start_date))
-            <div class="col-sm-3">
+            <div class="col-4">
             {!! Form::open(['route' => ['medications.administered', $data->id]]) !!}
               {!! Form::hidden('id', $data->id) !!}
               {!! Form::hidden('adminDate', $data->start_date) !!}
@@ -79,7 +79,7 @@
             </div>  --}}
             
           @endif
-            <div class="col-sm-3">
+            <div class="col-4">
             {!! link_to_route('medications.edit', '投薬日変更', ['medId' => $data->id], ['class' => 'btn-link']) !!}
             </div>
           </div>

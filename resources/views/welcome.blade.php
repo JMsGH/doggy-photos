@@ -5,7 +5,7 @@
         <div class="row align-items-center mb-5">
             <div class="col-sm-1"></div>
             <div class="col-sm-5">
-                <img src="https://dog-photos-bucket.s3-ap-northeast-1.amazonaws.com/welcome_page_img.png" class="profile-img rounded-circle img-thumbnail border-0">
+                <img src="https://dog-photos-bucket.s3-ap-northeast-1.amazonaws.com/welcome_page_img.png" class="profile-img rounded-circle img-thumbnail border-0 animated rollIn">
             </div>
             <div class="col-sm-6 align-items-center">
                 <h1 class="text-center animated bounceInDown">犬フォト！ <i class="fas fa-paw awesome"></i></h1>

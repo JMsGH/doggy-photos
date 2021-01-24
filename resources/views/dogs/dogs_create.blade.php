@@ -6,17 +6,18 @@
   <div class="col-sm-7">
     <div class="mt-5">
       <h2 class="mb-4">愛犬登録フォーム <i class="fas fa-paw awesome"></i></h2>
+      <h6 class="text-info">容量が2MB以下の写真を保存できます。</h6>
       <div class="custom-file">
         {!! Form::open(['route' => 'dogs.store', 'enctype' => 'multipart/form-data']) !!}
           <div class="form-group">
             {!! Form::file('photo', ['class'=>'custom-file-input mb-2', 'id'=>'inputFile']) !!}
-            {!! Form::label('photo','写真', ['class'=>'custom-file-label', 'for' => 'inputFile', 'data-browse'=>'参照']) !!}
+            {!! Form::label('photo','写真 (ドラッグ&ドロップ可)', ['class'=>'custom-file-label', 'for' => 'inputFile', 'data-browse'=>'参照']) !!}
           </div>
           <div class="form-group">
             {!! Form::label('dog_name', '名前', ['class' => 'font-weight-bold']) !!}
-            {!! Form::text('dog_name', old('dog_name'), ['class' => 'form-control', 'rows' => '2']) !!}
+            {!! Form::text('dog_name', old('dog_name'), ['class' => 'form-control mb-3']) !!}
             {!! Form::label('birthday', '誕生日', ['class' => 'font-weight-bold']) !!}
-            {!! Form::text('birthday', null, ['class' => 'form-control', 'id' => 'dog-bd-datepicker']) !!}
+            {!! Form::text('birthday', null, ['class' => 'form-control mb-3', 'id' => 'dog-bd-datepicker']) !!}
             {!! Form::label('comment', 'コメント', ['class' => 'font-weight-bold']) !!}
             {!! Form::textarea('comment', old('comment'), ['class' => 'form-control', 'rows' => '2']) !!}
           </div>

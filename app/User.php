@@ -147,7 +147,7 @@ class User extends Authenticatable
     public function favorite($postId)
     {
        // 既にお気に入りにしているかの確認
-       $exist = $this->is_favorite('$postId');
+       $exist = $this->is_favorite($postId);
     
         if ($exist) {
             // すでにお気に入りとしている場合は何もしない

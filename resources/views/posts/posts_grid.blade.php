@@ -29,7 +29,7 @@
       </div>
   </div>
 @else
-  <div class="alert alert-secondary" role="alert">
+  <div class="alert alert-secondary text-center" role="alert">
     表示する投稿がありません。
   </div>
 @endif

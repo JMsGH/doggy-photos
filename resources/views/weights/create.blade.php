@@ -15,7 +15,7 @@
           @endif
         </div>
           <div class="card-body">
-            <form action="{{ route('weights.store', ['dogId' => $dog->id]) }}" method="post">
+            <form action="{{ route('weights.store', ['id' => $dog->user_id, 'dogId' => $dog->id]) }}" method="post">
               @csrf
               <table class="table">
                 <tbody>

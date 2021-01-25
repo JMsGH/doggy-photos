@@ -28,7 +28,7 @@
             {{-- 写真を投稿へのリンク --}}
             <li class="dropdown-item">{!! link_to_route('posts.posting', '写真を投稿',  ['user' => Auth::id()]) !!}</li>
             {{-- フィラリア投薬へのリンク --}}
-            <li class="dropdown-item">{!! link_to_route('medications.show', 'フィラリア投薬') !!}</li>
+            <li class="dropdown-item">{!! link_to_route('medications.show', 'フィラリア投薬',  ['id' => Auth::id()]) !!}</li>
             {{-- 愛犬登録へのリンク --}}
             <li class="dropdown-item">{!! link_to_route('dogs.create', '愛犬登録', ['id' => \Auth::id()]) !!}</li>
             {{-- 愛犬ページへのリンク --}}

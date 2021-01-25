@@ -9,7 +9,7 @@ use App\Weight; // 追加
 class WeightController extends Controller
 {
   // 認証済みユーザ（閲覧者）の愛犬用体重入力ページを表示
-  public function create($dogId)
+  public function create($id, $dogId)
   {
     // dd($dogId);
     $dog = \App\Dog::findOrFail($dogId);
@@ -18,7 +18,8 @@ class WeightController extends Controller
     // 体重入力ページを表示
     if (\Auth::id() == $userId) {
       return view('weights.create', [
-        'dog' => $dog
+        'dog' => $dog,
+        'id' => $userId
       ]);      
     } else {
       return view('/');
@@ -26,7 +27,7 @@ class WeightController extends Controller
 
   }
   
-  public function store(Request $request, $dogId)
+  public function store(Request $request, $id, $dogId)
   {
     // バリデーション
     $request->validate([
@@ -50,6 +51,7 @@ class WeightController extends Controller
     // 体重表示ページへ移動
     // return view('weights.show', compact('weights'));
     $dog = \App\Dog::find($dogId);
+    $userId = $dog->user_id;
     $photo = $dog->photo;
     
     $weightLogs = [];
@@ -80,11 +82,12 @@ class WeightController extends Controller
       'weight_logs' => $weightLogs,
       'date_labels' => $dateLabels,
       'weight_ids' => $weightIds,
-      'photo' => $photo
+      'photo' => $photo,
+      'id' => $userId
     ]);
   }
   
-  public function show($dogId)
+  public function show($id, $dogId)
   {
     // 保存されている体重データを取り出す
     //dd($dogId);
@@ -125,7 +128,8 @@ class WeightController extends Controller
           'weight_logs' => $weightLogs,
           'date_labels' => $dateLabels,
           'weight_ids' => $weightIds,
-          'photo' => $photo
+          'photo' => $photo,
+          'id' => $userId
         ]);
         
         
@@ -136,14 +140,13 @@ class WeightController extends Controller
         return view('weights.show', [
           'weights' => $weights,
           'dogId' => $dogId,
-          'photo' => $photo
+          'photo' => $photo,
+          'id' => $userId
         ]);
       }
     } else {
         session()->flash('flash_message', 'ご自分の愛犬の体重記録のみ表示できます');
-        return view('dogs.dog', [
-          'dog' => $dog,
-      ]);
+        return redirect('/');
     }
   }
     
@@ -170,7 +173,8 @@ class WeightController extends Controller
       'dog' => $dog,
       'dogId' => $dogId,
       'weightId' => $weightId,
-      'weight' => $weight
+      'weight' => $weight,
+      'id' => $userId
     ]);
 
   }  

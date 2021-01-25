@@ -87,22 +87,7 @@ class DogsController extends Controller
       return view('dogs.dogs_create');
     }
     
-    /**
-     * 修正する愛犬データ1件を取得して表示
-     */
-    public function getEdit($dogId)
-    {
-      
-      // dd($dogId);
-      $dog = \App\Dog::findOrFail($dogId);
-      
-      // 'dogs.dogs_edit'は情報修正用ビュー
-      return view('dogs.dogs_edit', [
-        'dog' => $dog,
-      ]);
-      
-    }
-    
+
     /**
      * 愛犬情報を更新する関数
      * 
@@ -156,13 +141,50 @@ class DogsController extends Controller
       }
     
     // 愛犬詳細ページへのリンク
-    public function show ($dogId)
+    public function show ($id, $dogId)
     {
+      //dd($dogId);
       $dog = \App\Dog::find($dogId);
       
-      return view('dogs.dog')->with([
-        'dogId' => $dogId, 
-        'dog' => $dog,
-      ]);
+      $userId = $dog->user_id;
+      
+      if (\Auth::id() === $userId) {
+      
+        return view('dogs.dog')->with([
+          'dogId' => $dogId, 
+          'dog' => $dog,
+          'id' => $dog->user_id
+        ]);
+        
+      } else {
+        session()->flash('flash_message', '表示できるのは本人が登録した愛犬のみです。');
+        return redirect('/');
+      }
+    }   
+      
+    
+    /**
+     * 修正する愛犬データ1件を取得して表示
+     */
+    public function getEdit($id, $dogId)
+    {
+      $dog = \App\Dog::findOrFail($dogId);
+      
+      $userId = $dog->user_id;
+      
+      if (\Auth::id() === $userId) {
+      
+        // 'dogs.dogs_edit'は情報修正用ビュー
+        return view('dogs.dogs_edit', [
+          'dog' => $dog,
+          'id' => $userId
+        ]);
+        
+      } else {
+        session()->flash('flash_message', '修正できるのは本人が登録した愛犬のみです。');
+        return redirect('/');
+      }
+      
     }
+    
 }

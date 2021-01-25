@@ -10,7 +10,7 @@
         設定すると設定した回数分、31日間ごとに投薬予定日が表示されます。
   </h5>
   <h5 class="ml-2">
-    {!! link_to_route('medications.input', '[設定する]', ['class' => 'font-weight-bold btn-link']) !!}
+    {!! link_to_route('medications.input', '設定する', ['id' => \Auth::id()], ['class' => 'font-weight-bold btn-link']) !!}
   </h5>
 </div>
 
@@ -20,7 +20,7 @@
     投薬回数分の投薬を終えました。新たに設定しますか？
   </h5>
   <h5 class="ml-2">
-    {!! link_to_route('medications.input', '[設定する]', ['class' => 'font-weight-bold btn-link']) !!}
+    {!! link_to_route('medications.input', '設定する', ['id' => \Auth::id()],  ['class' => 'font-weight-bold btn-link']) !!}
   </h5>
 
 
@@ -64,7 +64,7 @@
           
           @if (date("Y-m-d H:i:s") > ($data->start_date))
             <div class="col-4">
-            {!! Form::open(['route' => ['medications.administered', $data->id]]) !!}
+            {!! Form::open(['route' => ['medications.administered', ['id'=> $data->user_id,  $data->id]]]) !!}
               {!! Form::hidden('id', $data->id) !!}
               {!! Form::hidden('adminDate', $data->start_date) !!}
               {!! Form::submit('投薬完了', ['class'=>'btn btn-success']) !!}
@@ -80,7 +80,7 @@
             
           @endif
             <div class="col-4">
-            {!! link_to_route('medications.edit', '投薬日変更', ['medId' => $data->id], ['class' => 'btn-link']) !!}
+            {!! link_to_route('medications.edit', '投薬日変更', ['id'=> $data->user_id, 'medId' => $data->id], ['class' => 'btn-link']) !!}
             </div>
           </div>
           

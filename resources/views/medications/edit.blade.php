@@ -6,11 +6,11 @@
   <div class="row justify-content-center">
     <div class="col-md-5 mt-4 mb-5">
      <h5 class="text-center mb-4">投薬日の変更</h5>
-      <form action ="{{ route('medications.update', ['medication' => $id]) }}" method="POST">
+      <form action ="{{ route('medications.update', ['id' => $id, 'medId' => $medId]) }}" method="POST">
         @method('PATCH')
         @csrf
         <div class="form-group">
-          <input type="hidden" name="id" value="{{ $id }}">
+          <input type="hidden" name="id" value="{{ $medId }}">
           <input class="form-control" type="text" name="start_date"  id="datepicker"></input>
         </div>
         <button type="submit" class="btn btn-info btn-block-right">変更する</button>

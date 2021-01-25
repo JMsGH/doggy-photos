@@ -36,8 +36,8 @@ Route::group(['middleware' => ['auth']], function (){
     Route::get('edit', 'UsersController@getEdit')->name('users.edit');
     
     // 愛犬関連のルート
-    Route::get('dogs.dogs_create', 'DogsController@create')->name('dogs.create');
-    Route::get('dogs.dogs', 'DogsController@index')->name('dogs.index');
+    Route::get('create', 'DogsController@create')->name('dogs.create');
+    Route::get('index', 'DogsController@index')->name('dogs.index');
     
     
   });
@@ -56,31 +56,32 @@ Route::group(['middleware' => ['auth']], function (){
   
   
   // フィラリア予防投薬スケジュールのためのルート
-  Route::group(['prefix' => 'medications/{medId}'], function () {
+  Route::group(['prefix' => '{id}/medications/{medId}'], function () {
     //Route::post('/medications_show', function(Request $request){});
-    Route::post('medications_show', 'FilariasisMedicationsController@store')->name('medications.store');
-    Route::get('medications_show', 'FilariasisMedicationsController@show')->name('medications.show');
+//    Route::post('store', 'FilariasisMedicationsController@store')->name('medications.store');
+    Route::get('show', 'FilariasisMedicationsController@show')->name('medications.show');
     Route::get('edit', 'FilariasisMedicationsController@edit')->name('medications.edit');
-    Route::post('medications_show', 'FilariasisMedicationsController@administered')->name('medications.administered');
-    Route::patch('medications_show', 'FilariasisMedicationsController@update')->name('medications.update');
+    Route::post('administered', 'FilariasisMedicationsController@administered')->name('medications.administered');
+    Route::patch('update', 'FilariasisMedicationsController@update')->name('medications.update');
   });
-  Route::resource('medications', 'FilariasisMedicationsController', ['only' => ['store', 'update']]);
-  Route::get('medications.input', 'FilariasisMedicationsController@input')->name('medications.input');
-  Route::get('medications.medications_show', 'FilariasisMedicationsController@show')->name('medications.show');
-  
+  Route::group(['prefix' => '{id}/medications'], function () {
+    Route::post('store', 'FilariasisMedicationsController@store')->name('medications.store');
+    Route::get('input', 'FilariasisMedicationsController@input')->name('medications.input');
+    Route::get('show', 'FilariasisMedicationsController@show')->name('medications.show');
+  });
   
   // 愛犬関連の登録･変更するルート
   Route::post('dogs.dogs', 'DogsController@storePhoto')->name('dogs.photo');
   
   Route::resource('dogs', 'DogsController', ['only' => ['destroy', 'store', 'update']]);
-  Route::group(['prefix' => 'dogs/{dogId}'], function () {
-    Route::get('dogs.dogs_edit', 'DogsController@getEdit')->name('dogs.edit');
-    Route::get('/', 'DogsController@show')->name('dogs.dog');
+  Route::group(['prefix' => '{id}/dogs/{dogId}'], function () {
+    Route::get('edit', 'DogsController@getEdit')->name('dogs.edit');
+    Route::get('detail', 'DogsController@show')->name('dogs.dog');
     
   });
   
   // 愛犬の体重を記録、表示するルート
-  Route::group(['prefix' => '{dogId}'], function () {
+  Route::group(['prefix' => '{id}/{dogId}'], function () {
     Route::resource('weights', 'WeightController', ['only' => ['create', 'store']]);
     Route::get('weights.show', 'WeightController@show')->name('weights.show');
 

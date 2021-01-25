@@ -45,11 +45,18 @@ class FilariasisMedicationsController extends Controller
             
       $adminDates = [];
       
+      if ($data->user_id == \Auth::id()){
+      
       // 投薬日表示ページへ移動
       return view('medications.medications_show', with([
           'data' => $data,
           'adminDates' => $adminDates
       ]));
+      
+      } else {
+          session()->flash('flash_message', '表示できるのは本人が登録した投薬情報のみです。');
+          return redirect('/');
+      }
     }
     
     // 認証済みユーザ（閲覧者）の投薬予定・確認ページを表示
@@ -84,43 +91,64 @@ class FilariasisMedicationsController extends Controller
     
     
     // 投薬日を変更するためのビューへ移動
-    public function edit($medication)
+    public function edit($id, $medId)
     {
-      $userId = \Auth::id();
-      // $data = FilariasisMedication::where('user_id', $userId)
-      //       ->orderBy('created_at', 'desc')
-      //       ->first();
+     
+      $data = FilariasisMedication::where('id', $medId)->first();
       
-      // $medId = $data->id;
+       //dd($data, $data->user_id);
+    
+      //dd($id, \Auth::id());
       
-       // 'update.blade'は投薬日変更用ビュー
-      return view('medications.edit', [
-        'user_id' => $userId,
-        'id' => $medication,
-      ]);
+      if ($id == \Auth::id()) {
+        
+              // ->orderBy('created_at', 'desc')
+              // ->first();
+        
+        // $medId = $data->id;
+        
+         // 'update.blade'は投薬日変更用ビュー
+        return view('medications.edit', [
+          'id' => $id,
+          'medId' => $medId,
+        ]);
+
+      } else {
+          session()->flash('flash_message', '修正できるのは本人が登録した投薬情報のみです。');
+          return redirect('/');
+      }
     }
     
     
     // 投稿日を変更するアクション
-    public function update(Request $request)
+    public function update(Request $request, $id, $medId)
     {
       $userId = \Auth::id();
       $medId = $request->id;
       
-      $data = FilariasisMedication::where('id', '=', $medId)->get();
+      $data = FilariasisMedication::where('id', '=', $medId)->first();
       
-      $med = FilariasisMedication::find($request->id);
-      $med->start_date = $request->start_date;
-      $med->save();
+      //dd($data);
       
-      $adminDates = \App\AdministeredDate::where('medication_id', $medId)->orderBy('administered_date', 'desc')->get();
-      
-      // 投薬予定日ページにリダイレクト
-      return redirect()->route('medications.show', [
-        'id' => $userId, 
-        'medication' => $medId,
-        'adminiDates' => $adminDates
-      ]);
+      if ($userId === $data->user_id) {
+        $med = FilariasisMedication::find($request->id);
+        $med->start_date = $request->start_date;
+        $med->save();
+        
+        $adminDates = \App\AdministeredDate::where('medication_id', $medId)->orderBy('administered_date', 'desc')->get();
+        
+        // 投薬予定日ページにリダイレクト
+        return redirect()->route('medications.show', [
+          'id' => $userId, 
+          'medication' => $medId,
+          'adminiDates' => $adminDates,
+        ]);
+        
+      } else {
+          session()->flash('flash_message', '修正できるのは本人が登録した投薬情報のみです。');
+          return redirect('/');
+      }
+
     }
     
     // 投薬完了を確定させるアクション

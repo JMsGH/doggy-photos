@@ -19,7 +19,7 @@
   </h5>
   {{-- 体重入力ページへのリンク --}}
   <h5 class="ml-2 text-center">
-    {!! link_to_route('weights.create', '体重入力ページへ',  ['dogId' => $dogId], ['class' => 'btn-edit']) !!}
+    {!! link_to_route('weights.create', '体重入力ページへ',  ['id' => $id, 'dogId' => $dogId], ['class' => 'btn-edit']) !!}
   </h5>
   
 @else
@@ -222,11 +222,11 @@
             </div>
           {{-- 体重入力ページへのリンク --}}
             <div class="p-2">
-              {!! link_to_route('weights.create', '体重を入力',  ['dogId' => $dog->id], ['class' => 'btn-edit ml-2']) !!}
+              {!! link_to_route('weights.create', '体重を入力',  ['id' => $dog->user_id, 'dogId' => $dog->id], ['class' => 'btn-edit ml-2']) !!}
             </div>
             {{-- グラフ更新ボタン --}}
             <div class="p-2">
-              {!! link_to_route('weights.show', 'グラフを更新',  ['dogId' => $dog->id], ['class' => 'btn-weight ml-2 mb-2']) !!}
+              {!! link_to_route('weights.show', 'グラフを更新',  ['id' => $dog->user_id, 'dogId' => $dog->id], ['class' => 'btn-weight ml-2 mb-2']) !!}
             </div>
           </div>
         </div>

@@ -3,7 +3,9 @@
 @section('content')
 <div class="pagebody">
 <h2 class="text-center mt-5 mb-5">うちの犬（たち） <i class="fas fa-paw awesome"></i></h2>
-  @if (is_countable($dogs))
+  @if (count($dogs)===0)
+  <h5 class="text-center text-info">愛犬が登録されていません。</h5>
+  @else
   <ul class="list-unstyled">
     @foreach ($dogs as $dog)
       <div class="row justify-content-center mb-4">
@@ -51,21 +53,21 @@
           <div class="row">
             <div class="col-sm-7">
               <div>
+                @if (Auth::id() == $dog->user_id)
                 {{-- 愛犬詳細ページへのリンク --}}
-                {!! link_to_route('dogs.dog', '愛犬詳細を表示', ['dogId' => $dog->id], ['class' => 'btn-detail mb-2']) !!}
+                {!! link_to_route('dogs.dog', '愛犬詳細を表示', ['id' => $dog->user_id, 'dogId' => $dog->id], ['class' => 'btn-detail mb-2']) !!}
               </div>
               <div>
-                @if (Auth::id() == $dog->user_id)
                   {{-- 登録内容修正ページへのリンク --}}
                   <div>
-                  {!! link_to_route('dogs.edit', '登録内容を修正', ['dogId' => $dog->id], ['class' => 'btn-edit mb-2']) !!}
+                  {!! link_to_route('dogs.edit', '登録内容を修正', ['id' => $dog->user_id, 'dogId' => $dog->id], ['class' => 'btn-edit mb-2']) !!}
                   </div>
                 
                   {{-- 体重記録へのリンク --}}
-                  {!! link_to_route('weights.show', '体重記録ページ',  ['dogId' => $dog->id], ['class' => 'btn-weight mb-2']) !!}
+                  {!! link_to_route('weights.show', '体重記録ページ',  ['id' => $dog->user_id, 'dogId' => $dog->id], ['class' => 'btn-weight mb-2']) !!}
                   
                   {{-- 体重入力ページへのリンク --}}
-                  {!! link_to_route('weights.create', '体重入力ページ',  ['dogId' => $dog->id], ['class' => 'btn-weight']) !!}
+                  {!! link_to_route('weights.create', '体重入力ページ',  ['id' => $dog->user_id, 'dogId' => $dog->id], ['class' => 'btn-weight']) !!}
                 </div>
               </div>
                 

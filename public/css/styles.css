@@ -237,6 +237,10 @@ a.btn-weight:hover {
   font-size: 1.5rem;
 }
 
+.font-slight-larter {
+  font-size: 1.2rem;
+}
+
 .font-twice-larger {
   font-size: 2rem;
 }
@@ -353,3 +357,42 @@ a.btn-weight:hover {
   font-size: 1.2rem;
   color: darkgrey;
 }
+
+.s-body {
+  margin-top: 5rem;
+}
+
+
+/*.s-body {
+  overflow: hidden;
+  /* push down the wrapper
+
+margin: 50% 0 0 0;
+position: relative;
+}
+
+.wrapper {
+  display: flex;
+  height: 100%;
+  width: 60%;
+  margin: 0 auto;
+}
+
+.scroll-text {
+  text-align: center;
+  font-size: 2.2vw;
+  line-height: 1.5em;
+  position: relative;
+  animation: scroll 30s linear;
+}
+
+@keyframes scroll {
+  from {
+    top: 0;
+  }
+  to {
+    top: -300px
+  }
+}
+
+*/

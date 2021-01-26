@@ -10,24 +10,32 @@ use App\Lib\PhotoUpload;
 
 class DogsController extends Controller
 {
-    public function index ()
+    public function index ($id)
     {
+      $userId = \Auth::id();
       
-      $data = [];
-      if (\Auth::check()) { // 認証済みユーザの場合
-        // 認証済みユーザを取得
-        $user = \Auth::user();
-        // ユーザの愛犬の一覧を作成日時の降順で取得
-        $dogs = $user->dogs()->orderBy('created_at', 'desc')->paginate(5);
-        //dd($dogs);
-        $data = [
-          'user' => $user,
-          'dogs' => $dogs,
-        ];
+      //dd($id, $userId);
+
+      if ($userId == $id) {
+      
+        $data = [];
+        // if (\Auth::check()) { // 認証済みユーザの場合
+          // 認証済みユーザを取得
+          $user = \Auth::user();
+          // ユーザの愛犬の一覧を作成日時の降順で取得
+          $dogs = $user->dogs()->orderBy('created_at', 'desc')->paginate(5);
+          //dd($dogs);
+          $data = [
+            'user' => $user,
+            'dogs' => $dogs,
+          ];
+          // 愛犬一覧viewで表示
+          return view('dogs.dogs', $data);          
+          
+      } else {
+          session()->flash('flash_message', '表示できるのは本人が登録した愛犬のみです。');
+          return redirect('/');
       }
-    
-    // 愛犬一覧viewで表示
-    return view('dogs.dogs', $data);
     
     }
     

@@ -60,31 +60,40 @@ class FilariasisMedicationsController extends Controller
     }
     
     // 認証済みユーザ（閲覧者）の投薬予定・確認ページを表示
-    public function show()
+    public function show($id)
     {
       $userId = \Auth::id();
       
-      // データがある場合
-      if (FilariasisMedication::where('user_id', '=', $userId)->count() > 0) {
-         $data = FilariasisMedication::where('user_id', $userId)
-            ->orderBy('created_at', 'desc')
-            ->first();
+      //dd($id, $userId);
       
-      $medId = $data->id;
-            
-      $adminDates = \App\AdministeredDate::where('medication_id', $medId)->orderBy('administered_date', 'desc')->get();
+      if ($userId == $id) {
       
-          // 取得した $data を viewに渡す
-          return view('medications.medications_show')->with([
-            'data' => $data,
-            'medication' => $medId,
-            'adminDates' => $adminDates
-          ]);
+        // データがある場合
+        if (FilariasisMedication::where('user_id', '=', $userId)->count() > 0) {
+           $data = FilariasisMedication::where('user_id', $userId)
+              ->orderBy('created_at', 'desc')
+              ->first();
         
-        // データがない場合は start_date は null としてビューを表示
+        $medId = $data->id;
+              
+        $adminDates = \App\AdministeredDate::where('medication_id', $medId)->orderBy('administered_date', 'desc')->get();
+        
+            // 取得した $data を viewに渡す
+            return view('medications.medications_show')->with([
+              'data' => $data,
+              'medication' => $medId,
+              'adminDates' => $adminDates
+            ]);
+          
+          // データがない場合は start_date は null としてビューを表示
+        } else {
+          $data = null;
+          return view('medications.medications_show', ['data' => $data]);
+        }
+      
       } else {
-        $data = null;
-        return view('medications.medications_show', ['data' => $data]);
+          session()->flash('flash_message', '表示できるのは本人が登録した投薬情報のみです。');
+          return redirect('/');
       }
      
     }
@@ -194,6 +203,12 @@ class FilariasisMedicationsController extends Controller
       
     }
     
-    
+    // GETアクセスされたときにトップページにリダイレクト
+    public function forceRedirect() {
+      
+        session()->flash('flash_message', '表示できないページへアクセスされたのでトップページへリダイレクトします。');
+        return redirect('/');      
+      
+    }
     
 }

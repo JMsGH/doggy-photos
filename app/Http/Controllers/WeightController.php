@@ -92,7 +92,7 @@ class WeightController extends Controller
     // 保存されている体重データを取り出す
     //dd($dogId);
     
-    $dog = \App\Dog::find($dogId);
+    $dog = \App\Dog::findOrFail($dogId);
     $userId = $dog->user_id;
     $photo = $dog->photo;
     

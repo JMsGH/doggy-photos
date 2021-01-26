@@ -66,6 +66,7 @@ Route::group(['middleware' => ['auth']], function (){
   });
   Route::group(['prefix' => '{id}/medications'], function () {
     Route::post('store', 'FilariasisMedicationsController@store')->name('medications.store');
+    Route::get('store', 'FilariasisMedicationsController@forceRedirect');
     Route::get('input', 'FilariasisMedicationsController@input')->name('medications.input');
     Route::get('show', 'FilariasisMedicationsController@show')->name('medications.show');
   });
@@ -83,7 +84,7 @@ Route::group(['middleware' => ['auth']], function (){
   // 愛犬の体重を記録、表示するルート
   Route::group(['prefix' => '{id}/{dogId}'], function () {
     Route::resource('weights', 'WeightController', ['only' => ['create', 'store']]);
-    Route::get('weights.show', 'WeightController@show')->name('weights.show');
+    Route::get('show', 'WeightController@show')->name('weights.show');
 
   
   });

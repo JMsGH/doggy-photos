@@ -3,7 +3,7 @@
 
   // フラッシュメッセージのfadeout
   $(function() {
-    $('#flash_message').fadeOut(8000);
+    $('#flash_message').fadeOut(9000);
   });
 
 })();

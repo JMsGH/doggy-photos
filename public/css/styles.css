@@ -362,6 +362,15 @@ a.btn-weight:hover {
   margin-top: 5rem;
 }
 
+.half-from-top {
+  height: 300px;
+  position: relative;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
 
 /*.s-body {
   overflow: hidden;

@@ -74,6 +74,7 @@ class DogsController extends Controller
       
       // 認証済みユーザ（閲覧者）がその犬の所有者である場合は、犬の登録を削除
       if (\Auth::id() === $dog->user_id) {
+        $dog->weights()->delete();
         $dog->delete();
       }
       
@@ -136,7 +137,13 @@ class DogsController extends Controller
             $dog->save();
           }
           
-          return back();
+          session()->flash('flash_message', '愛犬の写真を保存しました。');
+          
+          return view('dogs.dog', [
+            'dog' => $dog,
+            'id' => \Auth::id(),
+            'dogId' => $dogId
+          ]);
         
       }
     

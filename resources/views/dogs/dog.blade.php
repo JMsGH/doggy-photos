@@ -13,10 +13,13 @@
       <div class="row mb-4">
         <div class="col-sm-5 mb-4">
           {{-- 愛犬登録の画像を取得して表示 --}}
-          @if (isset($dog->photo))
+        @if (!($dog->photo))
+          <p class="mt-5"></p>
+        @else
             <div class="center">
-              <img class="mr-2 rounded img-fluid following dog-profile-normal" src="{{$dog->photo}}" alt="愛犬の写真">
+              <img class="mr-2 rounded img-fluid following dog-profile-normal" src="{{$dog->photo}}" />
             </div>
+        @endif
             {{-- 愛犬の写真を登録／変更 --}}
             <div class="custom-file">
               @if (\Auth::id() == $dog->user_id)
@@ -37,7 +40,7 @@
               @endif
               </div>
             </div>
-            @endif
+
           </div>
           <div class="col-sm-7">
             <div class="font-weight-bold mb-4">

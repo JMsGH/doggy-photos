@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Dog; // 追加
 use App\Weight; // 追加
+use Log;  // 追加
 
 class WeightController extends Controller
 {
   // 認証済みユーザ（閲覧者）の愛犬用体重入力ページを表示
-  public function create($id, $dogId)
+  public function create($dogId)
   {
     // dd($dogId);
     $dog = \App\Dog::findOrFail($dogId);
@@ -27,12 +28,12 @@ class WeightController extends Controller
 
   }
   
-  public function store(Request $request, $id, $dogId)
+  public function store(Request $request, $dogId)
   {
     // バリデーション
     $request->validate([
       'date_weighed' => 'required', 
-      'weight' => 'required | numeric | gte:0',
+      'weight' => 'required | numeric | between : 0.01, 200',
     ]);
     
     $weight = new Weight();
@@ -87,7 +88,7 @@ class WeightController extends Controller
     ]);
   }
   
-  public function show($id, $dogId)
+  public function show($dogId)
   {
     // 保存されている体重データを取り出す
     //dd($dogId);
@@ -151,30 +152,42 @@ class WeightController extends Controller
   }
     
 
-  public function update($weightId) 
+  public function update(Request $request) 
   {
-    $weight = \App\Weight::find($weightId);
+    $weight = \App\Weight::find($request->weightId);
     $dogId = $weight->dog_id;
     $dog = \App\Dog::find($dogId);
-    $userId = $dog->user_id;
+    //$userId = $dog->user_id;
     
-    $weight->date_weighed = strip_tags($_POST['date_weighed']);
-    $weight->weight = strip_tags($_POST['weight']);
+    
+    // $weight->date_weighed = strip_tags($_POST['date_weighed']);
+    // $weight->weight = strip_tags($_POST['weight']);
+
+    // バリデーション
+    $request->validate([
+      'date_weighed' => 'required', 
+      'weight' => 'required | numeric | between : 0.01, 200',
+    ]);
+    
+    $weight->date_weighed = $request->date_weighed;
+    $weight->weight = $request->weight;
+    
     $weight->save();
     
     $weights = Weight::where('dog_id', $dogId)
           ->OrderBy('date_weighed', 'asc')
           ->get();
-          
+    // この使い方は覚えておいてください！
+    Log::debug($weights);
+
     session()->flash('flash_message', '修正したデータに合わせてグラフを再描画しました');
     // return response()->json($weights);
     
     return view('weights.update', [
       'dog' => $dog,
       'dogId' => $dogId,
-      'weightId' => $weightId,
-      'weight' => $weight,
-      'id' => $userId
+      'weightId' => $request->weightId,
+      'weight' => $weight
     ]);
 
   }  

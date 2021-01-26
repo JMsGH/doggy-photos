@@ -37,7 +37,7 @@ Route::group(['middleware' => ['auth']], function (){
     
     // 愛犬関連のルート
     Route::get('create', 'DogsController@create')->name('dogs.create');
-    Route::get('index', 'DogsController@index')->name('dogs.index');
+    Route::get('dogs', 'DogsController@index')->name('dogs.index');
     
     
   });
@@ -82,7 +82,7 @@ Route::group(['middleware' => ['auth']], function (){
   });
   
   // 愛犬の体重を記録、表示するルート
-  Route::group(['prefix' => '{id}/{dogId}'], function () {
+  Route::group(['prefix' => '{dogId}'], function () {
     Route::resource('weights', 'WeightController', ['only' => ['create', 'store']]);
     Route::get('show', 'WeightController@show')->name('weights.show');
 

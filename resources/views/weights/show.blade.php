@@ -282,6 +282,7 @@
       data: $('form#weightRevisionForm').serialize(),
       // dataType: 'json',
       success: function(response){
+          console.log(response);
         // TODO ここでresposeの中から取り出す。
         // console.log(response.weight);
         

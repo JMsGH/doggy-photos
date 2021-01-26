@@ -1,6 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
+
+{{-- フラッシュメッセージ --}}
+@if (session('flash_message'))
+    <div class="flash_message bg-info text-center py-2 my-0 mb-5" id="flash_message">
+        {{ session('flash_message') }}
+    </div>
+@endif
+
 <div class="pagebody">
 <h2 class="text-center mt-5 mb-5">うちの犬（たち） <i class="fas fa-paw awesome"></i></h2>
   @if (count($dogs)===0)
@@ -11,10 +19,13 @@
       <div class="row justify-content-center mb-4">
         <div class="col-sm-5 mb-4">
         {{-- 愛犬登録の画像を取得して表示 --}}
-        @if (isset($dog->photo)) 
+        @if (!($dog->photo))
+          <p class="mt-5"></p>
+        @else
           <div class="center mb-2">
-            <img class="mr-2 rounded img-fluid following dog-profile-normal" src="{{$dog->photo}}" alt="愛犬の写真">
+            <img class="mr-2 rounded img-fluid following dog-profile-normal" src="{{$dog->photo}}" />
           </div>
+        @endif
           {{-- 愛犬の写真を登録／変更 --}}
           <div class="custom-file">
             @if (\Auth::id() == $dog->user_id)
@@ -35,7 +46,7 @@
             @endif
             </div>
           </div>
-        @endif
+
         </div>
         <div class="col-sm-7">
           <div class="font-weight-bold">

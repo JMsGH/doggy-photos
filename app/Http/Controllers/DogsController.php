@@ -106,7 +106,10 @@ class DogsController extends Controller
      */
     public function update(Request $request)
     {
-      // $requestedData = $request->all();
+      // バリデーション
+      $request->validate([
+        'dog_name' => 'required | max:255',
+      ]);
       
       $dog = \App\Dog::find($request->id);
       $dog->dog_name = $request->dog_name;
@@ -132,26 +135,36 @@ class DogsController extends Controller
     public function storePhoto (Request $request)
     {
           $dogId = $request->dogId;
+          $dog = \App\Dog::find($dogId);
           
-          // s3にファイルを保存し、保存先のパスを取得する
-          $dogPhoto = new PhotoUpload();
+          //dd(isset($request->photo));
           
-          $path = $dogPhoto->photoUpload($request);
+          if (isset($request->photo)) {
           
-          if ($path) {
-            $dog = \App\Dog::find($dogId);
+            // s3にファイルを保存し、保存先のパスを取得する
+            $dogPhoto = new PhotoUpload();
             
-            $dog->photo = $path;
-            $dog->save();
+            $path = $dogPhoto->photoUpload($request);
+            
+            if ($path) {
+              //$dog = \App\Dog::find($dogId);
+              
+              $dog->photo = $path;
+              $dog->save();
+            }
+            
+            session()->flash('flash_message', '愛犬の写真を保存しました。');
+            
+            return view('dogs.dog', [
+              'dog' => $dog,
+              'id' => \Auth::id(),
+              'dogId' => $dogId
+            ]);
+          
+          } else {
+            session()->flash('flash_message', '登録する写真が未選択です。');
+            return back();
           }
-          
-          session()->flash('flash_message', '愛犬の写真を保存しました。');
-          
-          return view('dogs.dog', [
-            'dog' => $dog,
-            'id' => \Auth::id(),
-            'dogId' => $dogId
-          ]);
         
       }
     

@@ -8,10 +8,12 @@
       <div class="card mt-4">
         <div class="card-header bg-info text-white font-weight-bolder inline-display center font-larger" >
           体重記録フォーム 
-          @if (isset($dog->photo)) 
-          <div class="center mb-2 inline-display">
-            <img class="mr-2 rounded img-fluid following smallest-img" src="{{$dog->photo}}" alt="{{ $dog->name }}">
-          </div>
+          @if ($dog->photo) 
+            <div class="center mb-2 inline-display">
+              <img class="mr-2 rounded img-fluid following smallest-img" src="{{$dog->photo}}" alt="{{ $dog->name }}">
+            </div>
+          @else
+              <div class="font-larger text-center">{{ $dog->dog_name }} </div>
           @endif
         </div>
           <div class="card-body">

@@ -3,11 +3,12 @@
 @section('content')
 
 <div class="display-flex mb-4">
-  @if (isset($photo)) 
+  @if (!($dog->photo))
+  <div class="font-larger ml-4 mb-2">{{ $dog->dog_name }} </div>
+  @else
     <!--<div class="smallest">-->
-      <img class="mr-2 rounded img-fluid following ex-smallest-img" src="{{$photo}}" alt="愛犬の写真">
+      <img class="mr-2 rounded img-fluid following ex-smallest-img" src="{{$photo}}" alt="{{ $dog->name }}">
     <!--</div>-->
-    
   @endif
   <div class="font-larger ml-4 mb-2">体重の変化</div>
   
@@ -19,7 +20,7 @@
   </h5>
   {{-- 体重入力ページへのリンク --}}
   <h5 class="ml-2 text-center">
-    {!! link_to_route('weights.create', '体重入力ページへ',  ['id' => $id, 'dogId' => $dogId], ['class' => 'btn-edit']) !!}
+    {!! link_to_route('weights.create', '体重入力ページへ',  ['dogId' => $dogId], ['class' => 'btn-edit']) !!}
   </h5>
   
 @else

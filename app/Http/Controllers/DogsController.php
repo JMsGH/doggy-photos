@@ -156,7 +156,7 @@ class DogsController extends Controller
             
             session()->flash('flash_message', '愛犬の写真を保存しました。');
             
-            return view('dogs.dog', [
+            return back()->with([
               'dog' => $dog,
               'id' => \Auth::id(),
               'dogId' => $dogId
@@ -164,7 +164,11 @@ class DogsController extends Controller
           
           } else {
             session()->flash('flash_message', '登録する写真が未選択です。');
-            return back();
+            return back()->with([
+              'dog' => $dog,
+              'id' => \Auth::id(),
+              'dogId' => $dogId              
+            ]);
           }
         
       }

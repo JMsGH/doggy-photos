@@ -211,6 +211,7 @@ class WeightController extends Controller
     $dogId = $weight->dog_id;
     $dog = \App\Dog::findOrFail($dogId);
     $userId = $dog->user_id;
+    $photo = $dog->photo;
     
     //dd($weightId);
     
@@ -242,11 +243,17 @@ class WeightController extends Controller
     // 体重データがない場合は$data=nullとしてビューを表示
     } else {
       $weights = null;
-      return view('weights.show', [
-        'weights' => $weights,
+      session()->flash('flash_message', '体重の記録がありません'.PHP_EOL.'体重データを入力するには[体重を入力]をクリックしてください');
+      return view('weights.delete', [
+        'dog' => $dog,
         'dogId' => $dogId,
-        'photo' => $photo
       ]);
+
+      // return view('dogs.dog', [
+      //   'dog' => $dog,
+      //   'dogId' => $dogId,
+      //   'photo' => $photo
+      // ]);
     }
     
   }

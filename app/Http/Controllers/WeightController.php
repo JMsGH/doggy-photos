@@ -139,6 +139,7 @@ class WeightController extends Controller
       } else {
         $weights = null;
         return view('weights.show', [
+          'dog' => $dog,
           'weights' => $weights,
           'dogId' => $dogId,
           'photo' => $photo,

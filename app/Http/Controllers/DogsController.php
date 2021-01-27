@@ -106,7 +106,8 @@ class DogsController extends Controller
      */
     public function update(Request $request)
     {
-      // バリデーション
+      // $requestedData = $request->all();
+            // バリデーション
       $request->validate([
         'dog_name' => 'required | max:255',
       ]);
@@ -169,7 +170,7 @@ class DogsController extends Controller
       }
     
     // 愛犬詳細ページへのリンク
-    public function show ($id, $dogId)
+    public function show ($dogId)
     {
       //dd($dogId);
       $dog = \App\Dog::find($dogId);
@@ -194,7 +195,7 @@ class DogsController extends Controller
     /**
      * 修正する愛犬データ1件を取得して表示
      */
-    public function getEdit($id, $dogId)
+    public function getEdit($dogId)
     {
       $dog = \App\Dog::findOrFail($dogId);
       

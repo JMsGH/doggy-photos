@@ -76,13 +76,14 @@ input.btn-link {
   /* 角丸       */
   font-size: 0.9rem;
   /* 文字サイズ */
+  letter-spacing: 0.1em;
   text-align: center;
   /* 文字位置   */
   cursor: pointer;
   /* カーソル   */
   padding: 10px 10px;
   /* 余白       */
-  background: #1f7de4;
+  background: #1f8fe4;
   /* 背景色     */
   color: #ffffff;
   /* 文字色     */

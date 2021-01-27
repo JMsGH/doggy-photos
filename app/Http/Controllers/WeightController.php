@@ -154,11 +154,17 @@ class WeightController extends Controller
 
   public function update(Request $request) 
   {
-    $weight = \App\Weight::find($request->weightId);
+    $weightId = $request->weightId;
+    //dd($weightId);
+    
+    $weight = \App\Weight::find($weightId);
+    //dd($weight);
+    
     $dogId = $weight->dog_id;
+    //dd($dogId);
+    
     $dog = \App\Dog::find($dogId);
     //$userId = $dog->user_id;
-    
     
     // $weight->date_weighed = strip_tags($_POST['date_weighed']);
     // $weight->weight = strip_tags($_POST['weight']);
@@ -172,11 +178,14 @@ class WeightController extends Controller
     $weight->date_weighed = $request->date_weighed;
     $weight->weight = $request->weight;
     
+    //dd($weight);
+    
     $weight->save();
     
     $weights = Weight::where('dog_id', $dogId)
           ->OrderBy('date_weighed', 'asc')
           ->get();
+          
     // この使い方は覚えておいてください！
     Log::debug($weights);
 
@@ -186,7 +195,7 @@ class WeightController extends Controller
     return view('weights.update', [
       'dog' => $dog,
       'dogId' => $dogId,
-      'weightId' => $request->weightId,
+      'weightId' => $weightId,
       'weight' => $weight
     ]);
 

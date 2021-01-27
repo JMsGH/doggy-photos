@@ -28,7 +28,9 @@
             </tr>
           </tbody>
         </table>
-        <input class="btn-link" type="submit" value="変更" />
+        <div class="pagination justify-content-end">
+          <input class="btn-link" type="submit" value="変更" />
+        </div>
           </form>
           
         </div>

@@ -58,19 +58,19 @@
                 <div class="row">
                   <div class="col-sm-7 mb-2">
                     <div>
-                    {!! link_to_route('dogs.edit', '登録内容修正', ['id' => $dog->user_id, 'dogId' => $dog->id], ['class' => 'btn-edit mb-3']) !!}
+                    {!! link_to_route('dogs.edit', '登録内容を修正', ['dogId' => $dog->id], ['class' => 'btn-edit mb-3']) !!}
                     </div>
                     
                     <div>
                     {{-- 体重記録ページへのリンク --}}
-                    {!! link_to_route('weights.show', '体重記録ページ',  ['id' => $dog->user_id, 'dogId' => $dog->id], ['class' => 'btn-edit mb-2']) !!}
+                    {!! link_to_route('weights.show', '体重記録ページ',  ['dogId' => $dog->id], ['class' => 'btn-weight mb-2']) !!}
                     
                     {{-- 体重入力ページへのリンク --}}
-                    {!! link_to_route('weights.create', '体重入力ページ',  ['id' => $dog->user_id, 'dogId' => $dog->id], ['class' => 'btn-edit mb-2']) !!}                    
+                    {!! link_to_route('weights.create', '体重入力ページ',  ['dogId' => $dog->id], ['class' => 'btn-weight mb-2']) !!}                    
                     </div>
                     
                     {{-- 愛犬一覧ページへのリンク --}}
-                    {!! link_to_route('dogs.index', '愛犬一覧ページ', ['id' => \Auth::id()], ['class' => 'btn-link']) !!}
+                    {!! link_to_route('dogs.index', '愛犬一覧ページ', ['id' => \Auth::id()], ['class' => 'btn-detail']) !!}
                   </div>
                   <div class="col-sm-5">
                     {{-- 愛犬登録解除ボタンのフォーム --}}

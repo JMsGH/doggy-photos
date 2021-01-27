@@ -267,10 +267,9 @@
   function submitForm(id) {
     let weightId = $('#weightId').val(); // weight_idを取得
 
-    // ボタンのvalueを取得？？
-    
-    console.log(actionValue);
-    console.log(id);
+    // ボタンのid, valueを確認
+    {{--console.log(actionValue);
+    console.log(id);--}}
 
     $.ajax({
       beforeSend: function(xhr) {
@@ -282,7 +281,7 @@
       data: $('form#weightRevisionForm').serialize(),
       // dataType: 'json',
       success: function(response){
-          console.log(response);
+        // console.log(response);
         // TODO ここでresposeの中から取り出す。
         // console.log(response.weight);
         

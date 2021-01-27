@@ -1,6 +1,9 @@
 
 <div class="mt-5">
-  <h6 class="text-center mb-2">体重データを以下のように修正しました</h6>
+  <h6 class="text-center mb-3 alert-primary">
+    体重データを以下のように修正しました<br>
+    グラフを更新してください
+  </h6>
   <div class="row justify-content-center">
     <div class="col-6">
       <table class="table table-striped">

@@ -75,7 +75,7 @@ Route::group(['middleware' => ['auth']], function (){
   Route::post('dogs.dogs', 'DogsController@storePhoto')->name('dogs.photo');
   
   Route::resource('dogs', 'DogsController', ['only' => ['destroy', 'store', 'update']]);
-  Route::group(['prefix' => '{id}/dogs/{dogId}'], function () {
+  Route::group(['prefix' => 'dogs/{dogId}'], function () {
     Route::get('edit', 'DogsController@getEdit')->name('dogs.edit');
     Route::get('detail', 'DogsController@show')->name('dogs.dog');
     

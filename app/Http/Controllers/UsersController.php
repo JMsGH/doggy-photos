@@ -6,6 +6,7 @@ use App\User;  // 追加
 use App\Lib\PhotoUpload;  // 追加
 use Illuminate\Support\Facades\Storage;  // 追加
 use Illuminate\Support\Facades\Auth; // 追加
+use Illuminate\Validation\Rule; // 追加
 
 
 class UsersController extends Controller
@@ -54,8 +55,7 @@ class UsersController extends Controller
     
     public function storePhoto (Request $request)
     {
-        
-          
+
           // s3にファイルを保存し、保存先のパスを取得する
           $userPhoto = new PhotoUpload();
           
@@ -169,12 +169,14 @@ class UsersController extends Controller
     public function update(Request $request)
     {
       $id = \Auth::id();
+      $user = User::find($request->id);
+      
       $request->validate([
         'name' => 'required',
-        'email' => 'required',
+        'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)]
       ]);
       
-      $user = User::find($request->id);
+
       $user->name = $request->name;
       $user->email = $request->email;
       $user->about_me_and_dog = $request->about_me_and_dog;

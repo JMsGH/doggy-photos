@@ -40,44 +40,49 @@
               @endif
               </div>
             </div>
-
           </div>
-          <div class="col-sm-7">
+          <div class="col-sm-1"></div>
+          <div class="col-sm-6">
             <div class="font-weight-bold mb-4">
-              <h4 class="mb-3">{{ $dog->dog_name }}</h4>
+              <h4 class="mb-4">{{ $dog->dog_name }}</h4>
               @if ($dog->birthday)
                 <p>誕生日: {{ $dog->birthday}} </p>
               @else
                 <p>誕生日</p>
               @endif
-              <p>コメント: {{ $dog->comment }} </p>
+              <p>コメント:</p>
             </div>
+              <div>
+                <p>{{ $dog->comment }}</p>
+              </div>
+              <br>
             <div>
               @if (Auth::id() == $dog->user_id)
                 {{-- 登録内容修正ページへのリンク --}}
                 <div class="row">
-                  <div class="col-sm-7 mb-2">
-                    <div>
-                    {!! link_to_route('dogs.edit', '登録内容を修正', ['dogId' => $dog->id], ['class' => 'btn-edit mb-3']) !!}
-                    </div>
-                    
-                    <div>
-                    {{-- 体重記録ページへのリンク --}}
-                    {!! link_to_route('weights.show', '体重記録ページ',  ['dogId' => $dog->id], ['class' => 'btn-weight mb-2']) !!}
-                    
-                    {{-- 体重入力ページへのリンク --}}
-                    {!! link_to_route('weights.create', '体重入力ページ',  ['dogId' => $dog->id], ['class' => 'btn-weight mb-2']) !!}                    
-                    </div>
-                    
-                    {{-- 愛犬一覧ページへのリンク --}}
-                    {!! link_to_route('dogs.index', '愛犬一覧ページ', ['id' => \Auth::id()], ['class' => 'btn-detail']) !!}
-                  </div>
-                  <div class="col-sm-5">
+                  <div class="col-4">
                     {{-- 愛犬登録解除ボタンのフォーム --}}
                     {!! Form::open(['route' => ['dogs.destroy', $dog->id], 'method' => 'delete']) !!}
                         {!! Form::submit('登録を削除', ['class' => 'btn btn-danger btn-sm post-button']) !!}
                     {!! Form::close() !!}
                   </div>
+                  <div class="col-8 mb-2">
+                    <div>
+                    {!! link_to_route('dogs.edit', '登録内容修正', ['dogId' => $dog->id], ['class' => 'btn-edit mb-3']) !!}
+                    </div>
+                    
+                    <div>
+                    {{-- 体重記録ページへのリンク --}}
+                    {!! link_to_route('weights.show', ' 記録ページ',  ['dogId' => $dog->id], ['class' => 'btn-weight mb-3 fas fa-weight']) !!}
+                    
+                    {{-- 体重入力ページへのリンク --}}
+                    {!! link_to_route('weights.create', ' 入力ページ',  ['dogId' => $dog->id], ['class' => 'btn-weight mb-3 fas fa-weight']) !!}                    
+                    </div>
+                    
+                    {{-- 愛犬一覧ページへのリンク --}}
+                    {!! link_to_route('dogs.index', ' 一覧ページ', ['id' => \Auth::id()], ['class' => 'btn-detail  fas fa-dog']) !!}
+                  </div>
+
                 </div>
               @endif
             </div>

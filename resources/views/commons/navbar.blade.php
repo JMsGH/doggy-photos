@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
     {{-- トップページへのリンク --}}
     @if (Auth::check())
-    <a href="/" class="navbar-brand">投稿写真一覧</a>
+    <a href="/" class="navbar-brand"><i class="fas fa-images"></i> 投稿写真一覧</a>
     @else 
     <a href="/" class="navbar-brand">犬フォト！</a>
     @endif
@@ -16,26 +16,26 @@
       <ul class="navbar-nav">
         @if (Auth::check())
         {{-- ユーザ一覧ページへのリンク --}}
-        <li class="nav-item">{!! link_to_route('users.index', 'ユーザ一覧', [], ['class' => 'nav-link']) !!}</li>
+        <li class="nav-item">{!! link_to_route('users.index', ' ユーザ一覧', [], ['class' => 'nav-link fas fa-user-friends']) !!}</li>
         
         {{-- お気に入り写真へのリンク --}}
-        <li class="nav-item">{!! link_to_route('user.favorites', 'お気に入り写真', ['id' => Auth::id()], ['class' => 'nav-link']) !!}</li>
+        <li class="nav-item">{!! link_to_route('user.favorites', ' お気に入り', ['id' => Auth::id()], ['class' => 'nav-link fab fa-gratipay']) !!}</li>
         
-        <li class="nav-item">{!! link_to_route('users.show', 'マイページ',  ['user' => Auth::id()], ['class' => 'nav-link']) !!}</li>
+        <li class="nav-item">{!! link_to_route('users.show', ' マイページ',  ['user' => Auth::id()], ['class' => 'nav-link fas fa-address-card']) !!}</li>
         <li class="nav-item dropdown">
           <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
           <ul class="dropdown-menu dropdown-menu-right">
             {{-- 写真を投稿へのリンク --}}
-            <li class="dropdown-item">{!! link_to_route('posts.posting', '写真を投稿',  ['user' => Auth::id()]) !!}</li>
+            <li class="dropdown-item">{!! link_to_route('posts.posting', ' 写真を投稿',  ['user' => Auth::id()],  ['class' => "fas fa-file-image"]) !!}</li>
             {{-- フィラリア投薬へのリンク --}}
-            <li class="dropdown-item">{!! link_to_route('medications.show', 'フィラリア投薬',  ['id' => Auth::id()]) !!}</li>
+            <li class="dropdown-item">{!! link_to_route('medications.show', ' フィラリア投薬',  ['id' => Auth::id()],  ['class' => "fas fa-prescription-bottle-alt"]) !!}</li>
             {{-- 愛犬登録へのリンク --}}
-            <li class="dropdown-item">{!! link_to_route('dogs.create', '愛犬登録', ['id' => \Auth::id()]) !!}</li>
+            <li class="dropdown-item">{!! link_to_route('dogs.create', ' 愛犬登録', ['id' => \Auth::id()],  ['class' => "fas fa-dog"]) !!}</li>
             {{-- 愛犬ページへのリンク --}}
-            <li class="dropdown-item">{!! link_to_route('dogs.index', '愛犬ページ', ['id' => \Auth::id()]) !!}</li>            
+            <li class="dropdown-item">{!! link_to_route('dogs.index', ' 愛犬ページ', ['id' => \Auth::id()],  ['class' => "fas fa-dog"]) !!}</li>            
 
             {{-- ログアウト --}}
-            <li class="dropdown-item">{!! link_to_route('logout.get', 'ログアウト') !!}</li>
+            <li class="dropdown-item">{!! link_to_route('logout.get', ' ログアウト',  ['class' => "fas fa-sign-out-alt"]) !!}</li>
           </ul>
         </li>
         

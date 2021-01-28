@@ -2,7 +2,10 @@
 @section('content')
 
 <div class="text-center">
-<h2 class="mt-5 mb-4">フィラリア予防薬 投薬予定・記録</h2>
+<h2 class="mt-5 mb-5">
+  <i class="fas fa-prescription-bottle-alt lil-darker-light-green"></i>
+  フィラリア予防薬 投薬予定・記録
+</h2>
 
 @if (!$data)
   <h5 class="mb-4 line-spacing-wider">
@@ -45,7 +48,7 @@
                   {{ $date->administered_date }}
               </div>
               <div class="col-7 text-left date-administered">
-                  投薬完了
+                  <i class="fas fa-check"></i>
               </div>
             </div>
           </li>

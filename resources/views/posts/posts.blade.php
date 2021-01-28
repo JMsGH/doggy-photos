@@ -11,7 +11,7 @@
 
 
 
-<h2 class="mt-5 mb-3 text-center">ギャラリー</h2>
+<h2 class="mt-5 mb-3 text-center"><i class="far fa-images lil-darker-light-green"></i> ギャラリー</h2>
 <p class="font-smaller text-right mb-3">写真をお気に入りにするにはグレーのハートをクリックします。</p>
 
 {{-- 投稿一覧を表示 --}}

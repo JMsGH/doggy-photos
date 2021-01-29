@@ -29,7 +29,7 @@
           </tbody>
         </table>
         <div class="pagination justify-content-end">
-          <input class="btn-link" type="submit" value="変更" />
+          <input class="btn-weight" type="submit" value="変 更" />
         </div>
           </form>
           

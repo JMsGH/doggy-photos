@@ -114,7 +114,8 @@ input.btn-link:hover {
   line-height: 2rem;
 }
 
-a.btn-edit {
+a.btn-edit,
+input.btn-edit {
   display: inline-block;
   border-radius: 5%;
   /* 角丸       */
@@ -140,7 +141,8 @@ a.btn-edit {
   /* 影の設定 */
 }
 
-a.btn-edit:hover {
+a.btn-edit:hover,
+input.btn-edit:hover {
   box-shadow: none;
   /* カーソル時の影消去 */
   opacity: 0.8;
@@ -180,7 +182,8 @@ a.btn-detail:hover {
   /* カーソル時透明度 */
 }
 
-a.btn-weight {
+a.btn-weight,
+input.btn-weight {
   display: inline-block;
   border-radius: 5%;
   /* 角丸       */
@@ -206,7 +209,8 @@ a.btn-weight {
   /* 影の設定 */
 }
 
-a.btn-weight:hover {
+a.btn-weight:hover,
+input.btn-weight:hover {
   box-shadow: none;
   /* カーソル時の影消去 */
   opacity: 0.8;

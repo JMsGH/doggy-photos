@@ -171,12 +171,7 @@
            <form id="weightRevisionForm" name="weightRevision" role="form">
               <table class="table">
                 <tbody>
-                  <tr>
-                    <th scope="row">weight_id</th>
-                    <td>
-                      <input type="text" name="weight_id" id="weightId" />
-                    </td>
-                  </tr>
+                  <input type="hidden" name="weight_id" id="weightId" />
                   <tr>
                     <th scope="row">日付</th>
                     <td>
@@ -212,16 +207,16 @@
             </div>
           </div>
           <div class="d-flex justify-content-end">
-            <div class="p-2">{!! link_to_route('dogs.index', '愛犬ページ', ['id' => \Auth::id()], ['class' => 'btn-detail ml-2']) !!}
+            <div class="p-2">{!! link_to_route('dogs.index', ' ページ', ['id' => \Auth::id()], ['class' => 'btn-detail ml-2 fas fa-dog']) !!}
             </div>
           {{-- 体重入力ページへのリンク --}}
             <div class="p-2">
-              {!! link_to_route('weights.create', '体重を入力',  ['id' => $dog->user_id, 'dogId' => $dog->id], ['class' => 'btn-edit ml-2']) !!}
+              {!! link_to_route('weights.create', ' を入力',  ['id' => $dog->user_id, 'dogId' => $dog->id], ['class' => 'btn-weight ml-2 fas fa-weight']) !!}
             </div>
-            {{-- グラフ更新ボタン --}}
+            {{-- グラフ更新ボタン
             <div class="p-2">
               {!! link_to_route('weights.show', 'グラフを更新',  ['id' => $dog->user_id, 'dogId' => $dog->id], ['class' => 'btn-weight ml-2 mb-2']) !!}
-            </div>
+            </div> --}}
           </div>
         </div>
       </div>
@@ -231,7 +226,7 @@
       グラフの点にカーソルを合わせると体重データ（日付、体重）が表示されます。
     </li>
     <li class="mb-2">
-      グラフの点をクリックして体重データの修正と削除ができます。修正、削除後は [グラフを更新] ボタンをクリックしてグラフを更新してください。
+      グラフの点をクリックして体重データの修正と削除ができます。
     </li>
     <li>
       グラフにはデータが20件ずつ表示されます。前後のデータを表示するにはグラフの下にある [<] [>]または数字をクリックしてください。

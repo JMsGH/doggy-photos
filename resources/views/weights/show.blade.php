@@ -54,23 +54,26 @@
 	
 	//体重ログ
 	const weight_logs = @json($weight_logs);
-	
-	const aryMax = function(a, b) {
-	 return Math.max(a, b);
-	};
-	
-	const aryMin = function(a, b) {
-	  return Math.min(a, b);
-	};
-	
-	let min_label = Math.floor((weight_logs).reduce(aryMin) - 0.5);
-	let max_label = Math.ceil((weight_logs).reduce(aryMax) + 0.5);
+
 	
 	// ページ読み込み時にグラフを描画
-	drawChart();
+	drawChart(labels, weight_ids, weight_logs);
 
 	//グラフ描画処理
-	function drawChart() {
+	// console.log(labels, weight_ids, weight_logs);
+	function drawChart(labels, weight_ids, weight_logs) {
+
+  	const aryMax = function(a, b) {
+  	 return Math.max(a, b);
+  	};
+  	
+  	const aryMin = function(a, b) {
+  	  return Math.min(a, b);
+  	};
+  	
+  	let min_label = Math.floor((weight_logs).reduce(aryMin) - 0.5);
+  	let max_label = Math.ceil((weight_logs).reduce(aryMax) + 0.5);
+
      var ctx = document.getElementById("myChart");
      window.myChart = new Chart(ctx, {            // グローバル変数として作成
   		type: 'line',
@@ -148,16 +151,6 @@
   		}
      });
     }
-  // 更新ボタンをクリックしたらグラフを再描画
-  // document.getElementById('update-btn').onclick = function() {
-	  // すでにグラフが生成されている場合はグラフを破棄する
-	  // console.log('Clicked');
-	  // if (myChart) {
-    //  myChart.destroy();
-    // }
-	  
-	  // drawChart(); // グラフを再描画
-	// }
   </script>  
   <!-- グラフを描画ここまで -->
   
@@ -284,12 +277,27 @@
       success: function(response){
         // console.log(response);
         // TODO ここでresposeの中から取り出す。
-        // console.log(response.weight);
+        console.log(response.weight_logs);
+        if (!response.weight_logs) {
+          if (myChart) {
+            myChart.destroy();
+          }
+          $('#weightModal').modal('hide');
         
-        // TODO drawChart()再度呼び出す。
-
-        $('#weightUpdate').html(response);
-        $('#weightModal').modal('hide');
+        } else {
+        
+          if (myChart) {
+            myChart.destroy();
+          }
+                
+          // TODO drawChart()再度呼び出す。
+          // console.log(response.labels, response.weight_ids, response.weight_logs);
+          
+          drawChart(response.labels, response.weight_ids, response.weight_logs);
+  
+          $('#weightUpdate').html(response);
+          $('#weightModal').modal('hide');
+        }
       },
       error: function(XMLHttpRequest, textStatus, errorThrown) {
         console.log("ajax通信に失敗しました");
